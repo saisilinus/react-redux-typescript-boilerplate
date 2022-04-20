@@ -69,6 +69,6 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.js": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
   }
 }
