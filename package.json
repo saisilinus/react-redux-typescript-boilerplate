@@ -27,8 +27,8 @@
     "commit": "cz",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
+    "prettier": "prettier --check **/*.{js,jsx,ts,tsx}",
+    "prettier:fix": "prettier --write **/*.{js,jsx,ts,tsx}",
     "prepare": "husky install"
   },
   "browserslist": {
@@ -70,5 +70,9 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
+  },
+  "prettier":{
+    "singleQuote": true,
+    "printWidth": 125
   }
 }
