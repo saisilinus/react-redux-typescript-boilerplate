@@ -1,23 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { useLoginMutation } from './modules/auth/auth.api';
+import { selectCurrentUser, setCredentials } from './modules/auth/auth.slice';
+import { ILoginRequest } from './modules/auth/auth.types';
 import Loader from './modules/common/loader/Loader';
 
 function App() {
-  const [hide, setHide] = useState(false);
+  const dispatch = useDispatch();
+  const userData: ILoginRequest = {
+    email: 'jerry@example.com',
+    password: 'password1',
+  };
 
-  function mock() {
-    setTimeout(() => setHide(true), 3000);
-  }
+  const user = useSelector(selectCurrentUser);
+
+  const [updateUser, { isLoading: isLogging }] = useLoginMutation();
 
   useEffect(() => {
-    mock();
-  });
+    updateUser(userData)
+      .unwrap()
+      .then((payload) => {
+        dispatch(setCredentials(payload));
+      });
+  }, []);
 
   return (
     <>
-      <Loader hide={hide} />
+      <Loader hide={!isLogging} />
       <div className="d-flex align-items-center justify-content-center h-100">
-        <h1>You had to wait...</h1>
+        <h1>Thank you for your patience {user?.name}</h1>
       </div>
     </>
   );

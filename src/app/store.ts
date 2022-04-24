@@ -1,10 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
-import api from '../modules/common/api';
+// eslint-disable-next-line import/no-cycle
+import api from './api';
+
+// reducers
+import authReducer from '../modules/auth/auth.slice';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
