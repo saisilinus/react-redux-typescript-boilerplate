@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "release": "standard-version",
-    "commit": "cz",
+    "commit": "git add -A && cz",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --check **/*.{js,jsx,ts,tsx}",
