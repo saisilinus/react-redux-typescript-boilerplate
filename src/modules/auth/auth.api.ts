@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import api from '../../app/api';
 import { ILoginRequest, ILogoutRequest, IRegisterRequest, IUserWithTokens } from './auth.types';
 
@@ -28,3 +29,4 @@ const authApi = api.injectEndpoints({
 });
 
 export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;
+export default authApi;

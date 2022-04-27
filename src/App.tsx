@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './App.css';
 import { useLoginMutation } from './modules/auth/auth.api';
-import { selectCurrentUser, setCredentials } from './modules/auth/auth.slice';
+import { selectCurrentUser } from './modules/auth/auth.slice';
 import { ILoginRequest } from './modules/auth/auth.types';
 import Loader from './modules/common/loader/Loader';
 
 function App() {
-  const dispatch = useDispatch();
   const userData: ILoginRequest = {
     email: 'jerry@example.com',
     password: 'password1',
@@ -18,11 +17,7 @@ function App() {
   const [updateUser, { isLoading: isLogging }] = useLoginMutation();
 
   useEffect(() => {
-    updateUser(userData)
-      .unwrap()
-      .then((payload) => {
-        dispatch(setCredentials(payload));
-      });
+    updateUser(userData);
   }, []);
 
   return (

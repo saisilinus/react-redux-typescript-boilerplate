@@ -1,11 +1,12 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 // eslint-disable-next-line import/no-cycle
 import { RootState } from './store';
+// eslint-disable-next-line import/no-cycle
 import { logout, setCredentials } from '../modules/auth/auth.slice';
 import { IUserWithTokens } from '../modules/auth/auth.types';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:4000/v1/',
+  baseUrl: process.env.REACT_APP_APIKEY,
   prepareHeaders: (headers, { getState }) => {
     const { token } = (getState() as RootState).auth;
     if (token) {
@@ -38,8 +39,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       if (refreshResult.data) {
         const userWithTokens = refreshResult.data as IUserWithTokens;
         api.dispatch(setCredentials(userWithTokens));
-        // store the new refresh token
-        localStorage.setItem('refreshToken', userWithTokens.tokens.refresh.token);
       } else {
         api.dispatch(logout());
       }
