@@ -1,11 +1,4 @@
-export interface IUser {
-  id: string;
-  name: string;
-  role: string;
-  email: string;
-  password: string;
-  isEmailVerified: boolean;
-}
+import { IUser } from '../users/users.types';
 
 export type IRegisterRequest = Omit<IUser, 'id' | 'isEmailVerified' | 'role'>;
 
