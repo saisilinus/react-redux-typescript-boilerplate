@@ -31,21 +31,35 @@ export interface IRegisterResponse {
   tokens: AccessAndRefreshTokens;
 }
 
-export interface ILoginRequest {
-  email: IUser['email'];
-  password: string;
-}
+export type ILoginRequest = Pick<IUser, 'email' | 'password'>;
 
 export type AuthState = {
   user: IUserWithoutPassword | null;
-  token: string | null;
+  token: ITokenPayload['token'] | null;
 };
 
 export interface ILogoutRequest {
-  refreshToken: string;
+  refreshToken: ITokenPayload['token'];
 }
 
 export interface IUserWithTokens {
   user: IUserWithoutPassword;
   tokens: AccessAndRefreshTokens;
 }
+
+export interface IRefreshTokenRequest {
+  refreshToken: ITokenPayload['token'];
+}
+
+export type IForgotPasswordRequest = Pick<IUser, 'email'>;
+
+export type IResetPasswordRequestBody = Pick<IUser, 'password'>;
+
+export type IResetPasswordRequestParams = Pick<ITokenPayload, 'token'>;
+
+export interface IResetPasswordRequest {
+  body: IResetPasswordRequestBody;
+  params: IResetPasswordRequestParams;
+}
+
+export type IVerifyEmailRequestParams = Pick<ITokenPayload, 'token'>;

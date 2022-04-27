@@ -16,7 +16,11 @@ const authSlice = createSlice({
       state.token = tokens.access.token;
       localStorage.setItem('refreshToken', tokens.refresh.token);
     },
-    logout: () => initialState,
+    logout: (state) => {
+      state.user = initialState.user;
+      state.token = initialState.token;
+      localStorage.removeItem('refreshToken');
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
@@ -24,7 +28,16 @@ const authSlice = createSlice({
       state.token = payload.tokens.access.token;
       localStorage.setItem('refreshToken', payload.tokens.refresh.token);
     });
-    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, () => initialState);
+    builder.addMatcher(authApi.endpoints.register.matchFulfilled, (state, { payload }) => {
+      state.user = payload.user;
+      state.token = payload.tokens.access.token;
+      localStorage.setItem('refreshToken', payload.tokens.refresh.token);
+    });
+    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+      state.user = initialState.user;
+      state.token = initialState.token;
+      localStorage.removeItem('refreshToken');
+    });
   },
 });
 
