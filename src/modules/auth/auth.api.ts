@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import api from '../../app/api';
 import {
   IForgotPasswordRequest,

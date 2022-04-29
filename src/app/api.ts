@@ -1,7 +1,6 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 // eslint-disable-next-line import/no-cycle
 import { RootState } from './store';
-// eslint-disable-next-line import/no-cycle
 import { logout, setCredentials } from '../modules/auth/auth.slice';
 import { IUserWithTokens } from '../modules/auth/auth.types';
 

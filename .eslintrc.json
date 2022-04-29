@@ -37,6 +37,8 @@
         "unnamedComponents": ["function-expression", "arrow-function"]
       }
     ],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }]
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "no-undef": "off",
+    "react/jsx-no-bind": [ "error", { "allowFunctions" : true, "allowArrowFunctions": true } ]
   }
 }

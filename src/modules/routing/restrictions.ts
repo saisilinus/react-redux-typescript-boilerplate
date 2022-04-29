@@ -1,5 +1,5 @@
 const restrictions: Record<string, string[]> = {
-  none: [],
+  none: ['admin', 'user'],
   user: ['admin', 'user'],
   admin: ['admin'],
 };

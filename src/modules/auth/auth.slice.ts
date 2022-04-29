@@ -2,8 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
 import { AuthState, IUserWithTokens } from './auth.types';
-// eslint-disable-next-line import/no-cycle
-import authApi from './auth.api';
 
 const initialState = { user: null, token: null } as AuthState;
 
@@ -21,23 +19,6 @@ const authSlice = createSlice({
       state.token = initialState.token;
       localStorage.removeItem('refreshToken');
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-      state.user = payload.user;
-      state.token = payload.tokens.access.token;
-      localStorage.setItem('refreshToken', payload.tokens.refresh.token);
-    });
-    builder.addMatcher(authApi.endpoints.register.matchFulfilled, (state, { payload }) => {
-      state.user = payload.user;
-      state.token = payload.tokens.access.token;
-      localStorage.setItem('refreshToken', payload.tokens.refresh.token);
-    });
-    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-      state.user = initialState.user;
-      state.token = initialState.token;
-      localStorage.removeItem('refreshToken');
-    });
   },
 });
 

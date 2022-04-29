@@ -2,19 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
 import { store } from './app/store';
+import { Routing } from './modules/routing';
 import * as serviceWorker from './serviceWorker';
 
 // styles
-import './index.css';
 import './styles/custom.scss';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Routing />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
