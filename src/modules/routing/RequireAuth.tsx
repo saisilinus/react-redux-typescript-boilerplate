@@ -12,7 +12,7 @@ const RequireAuth = ({ element, restrictedTo }: Props) => {
   const user = useAppSelector(selectCurrentUser);
   const location = useLocation();
 
-  if (user && restrictedTo.includes(user.role)) {
+  if (!user || !restrictedTo.includes(user.role)) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return element;

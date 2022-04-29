@@ -6,6 +6,8 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from '@fortawesome/free-solid-sv
 import BgImage from '../../assets/img/illustrations/signin.svg';
 import { routes } from '../routing';
 import { useLoginMutation } from './auth.api';
+import { useAppDispatch } from '../../app/hooks';
+import { setCredentials } from './auth.slice';
 
 interface IdealLocationState {
   from: {
@@ -18,6 +20,7 @@ type LocationState = IdealLocationState | null;
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
   const [loginUser] = useLoginMutation();
 
   const [email, setEmail] = useState('');
@@ -34,14 +37,17 @@ const Login = () => {
     event.preventDefault();
 
     if (email && password) {
-      try {
-        await loginUser({ email, password });
-        clearFields();
-        navigate(previousLocationState?.from.pathname || '/', { replace: true });
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('rejected', error);
-      }
+      await loginUser({ email, password })
+        .unwrap()
+        .then((payload) => {
+          dispatch(setCredentials(payload));
+          clearFields();
+          navigate(previousLocationState?.from.pathname || '/', { replace: true });
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('rejected', error);
+        });
     }
   }
 
