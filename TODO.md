@@ -52,6 +52,6 @@
 
 ### Other Tasks
 
-- [ ] Add error handling
-  - [ ] Add error handling component
-  - [ ] Add error handling logic
+- [x] Add error handling
+  - [x] Add error handling component
+  - [x] Add error handling logic
