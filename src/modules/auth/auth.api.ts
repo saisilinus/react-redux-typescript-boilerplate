@@ -40,10 +40,11 @@ const authApi = apiWithAuthTags.injectEndpoints({
     }),
     refreshTokens: builder.mutation<IUserWithTokens, IRefreshTokenRequest>({
       query: (body) => ({
-        url: 'auth/refresh-token',
+        url: 'auth/refresh-tokens',
         method: 'POST',
         body,
       }),
+      extraOptions: { maxRetries: 0 },
       invalidatesTags: ['Auth'],
     }),
     forgotPassword: builder.mutation<void, IForgotPasswordRequest>({

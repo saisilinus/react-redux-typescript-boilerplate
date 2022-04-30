@@ -7,7 +7,7 @@
   - [ ] Verify Email
   - [ ] Lock
   - [ ] Profile
-- [ ] Add routing for pages
+- [x] Add routing for pages
 - [x] Add routing auth
 
 ### Users Tasks

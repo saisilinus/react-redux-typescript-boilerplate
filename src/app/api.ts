@@ -1,13 +1,13 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
-// eslint-disable-next-line import/no-cycle
-import { RootState } from './store';
-import { logout, setCredentials } from '../modules/auth/auth.slice';
+import { Mutex } from 'async-mutex';
+import { logout } from '../modules/auth/auth.slice';
 import { IUserWithTokens } from '../modules/auth/auth.types';
 
+const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_APIKEY,
-  prepareHeaders: (headers, { getState }) => {
-    const { token } = (getState() as RootState).auth;
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem('accessToken');
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -20,26 +20,36 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   api,
   extraOptions
 ) => {
+  await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
-    const refreshToken = localStorage.getItem('refreshToken');
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire();
+      try {
+        const refreshToken = localStorage.getItem('refreshToken');
 
-    if (refreshToken) {
-      // try to get a new token
-      const refreshResult = await baseQuery(
-        {
-          url: 'auth/refresh-tokens',
-          method: 'POST',
-          body: { refreshToken },
-        },
-        api,
-        extraOptions
-      );
-      if (refreshResult.data) {
-        const userWithTokens = refreshResult.data as IUserWithTokens;
-        api.dispatch(setCredentials(userWithTokens));
-      } else {
-        api.dispatch(logout());
+        if (refreshToken) {
+          // try to get a new token
+          const refreshResult = await baseQuery(
+            {
+              url: 'auth/refresh-tokens',
+              method: 'POST',
+              body: { refreshToken },
+            },
+            api,
+            extraOptions
+          );
+          if (refreshResult.data) {
+            const userWithTokens = refreshResult.data as IUserWithTokens;
+            localStorage.setItem('accessToken', userWithTokens.tokens.access.token);
+            localStorage.setItem('refreshToken', userWithTokens.tokens.refresh.token);
+            localStorage.setItem('userId', userWithTokens.user.id);
+          } else {
+            api.dispatch(logout());
+          }
+        }
+      } finally {
+        release();
       }
     }
     // retry the initial query

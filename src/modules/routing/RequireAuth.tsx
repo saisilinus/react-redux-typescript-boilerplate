@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
-import { selectCurrentUser } from '../auth/auth.slice';
+import Loader from '../common/loader/Loader';
+import { useGetSingleUserQuery } from '../users/users.api';
 
 type Props = {
   element: JSX.Element;
@@ -9,12 +9,22 @@ type Props = {
 };
 
 const RequireAuth = ({ element, restrictedTo }: Props) => {
-  const user = useAppSelector(selectCurrentUser);
   const location = useLocation();
+  const id = localStorage.getItem('userId');
+  if (id) {
+    const { data: user, isLoading, isError } = useGetSingleUserQuery({ id });
 
-  if (!user || !restrictedTo.includes(user.role)) {
+    if (isLoading) return <Loader hide={!isLoading} />;
+
+    if (isError) return <div>An error has occurred!</div>;
+
+    if (!user || !restrictedTo.includes(user.role)) {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+  } else if (!id) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+
   return element;
 };
 

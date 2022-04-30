@@ -6,8 +6,6 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from '@fortawesome/free-solid-sv
 import BgImage from '../../assets/img/illustrations/signin.svg';
 import { routes } from '../routing';
 import { useLoginMutation } from './auth.api';
-import { useAppDispatch } from '../../app/hooks';
-import { setCredentials } from './auth.slice';
 
 interface IdealLocationState {
   from: {
@@ -20,7 +18,6 @@ type LocationState = IdealLocationState | null;
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useAppDispatch();
   const [loginUser] = useLoginMutation();
 
   const [email, setEmail] = useState('');
@@ -40,7 +37,9 @@ const Login = () => {
       await loginUser({ email, password })
         .unwrap()
         .then((payload) => {
-          dispatch(setCredentials(payload));
+          localStorage.setItem('accessToken', payload.tokens.access.token);
+          localStorage.setItem('refreshToken', payload.tokens.refresh.token);
+          localStorage.setItem('userId', payload.user.id);
           clearFields();
           navigate(previousLocationState?.from.pathname || '/', { replace: true });
         })
