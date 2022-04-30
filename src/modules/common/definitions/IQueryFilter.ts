@@ -1,4 +1,4 @@
-export interface IQueryFilter {
+export default interface IQueryFilter {
   sortBy: string;
   projectBy: string;
   limit: number;

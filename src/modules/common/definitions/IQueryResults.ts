@@ -1,6 +1,6 @@
-import { IDoc } from './IDoc';
+import IDoc from './IDoc';
 
-export interface IQueryResult {
+export default interface IQueryResult {
   results: IDoc[];
   page: number;
   limit: number;

@@ -1,3 +1,3 @@
-export interface IDoc {
+export default interface IDoc {
   id: any;
 }

@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 // styles
 import './styles/custom.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>

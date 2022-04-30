@@ -1,8 +1,20 @@
-export interface IRoutePath {
+interface IRoutePath {
   path: string;
 }
 
-const routes: Record<string, IRoutePath> = {
+interface IRoutes {
+  Home: IRoutePath;
+  Login: IRoutePath;
+  Register: IRoutePath;
+  Lock: IRoutePath;
+  Profile: IRoutePath;
+  ResetPassword: IRoutePath;
+  VerifyEmail: IRoutePath;
+  NotFound: IRoutePath;
+  Dashboard: IRoutePath;
+}
+
+const routes: IRoutes = {
   Home: { path: '/' },
   Login: { path: 'login' },
   Register: { path: 'register' },

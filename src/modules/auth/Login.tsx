@@ -6,6 +6,7 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from '@fortawesome/free-solid-sv
 import BgImage from '../../assets/img/illustrations/signin.svg';
 import { routes } from '../routing';
 import { useLoginMutation } from './auth.api';
+import NotifyContainer from '../common/toast/Notify';
 
 interface IdealLocationState {
   from: {
@@ -52,6 +53,7 @@ const Login = () => {
 
   return (
     <main>
+      <NotifyContainer />
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">

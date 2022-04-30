@@ -1,6 +1,6 @@
-import { IDoc } from '../common/definitions/IDoc';
-import { IQueryFilter } from '../common/definitions/IQueryFilter';
-import { IQueryResult } from '../common/definitions/IQueryResults';
+import IDoc from '../common/definitions/IDoc';
+import IQueryFilter from '../common/definitions/IQueryFilter';
+import IQueryResult from '../common/definitions/IQueryResults';
 
 export interface IUser extends IDoc {
   id: string;

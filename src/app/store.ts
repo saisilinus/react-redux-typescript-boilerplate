@@ -5,13 +5,14 @@ import api from './api';
 
 // reducers
 import { authReducer } from '../modules/auth';
+import { rtkQueryErrorLogger } from '../modules/common/toast/Notify';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware, rtkQueryErrorLogger),
 });
 
 setupListeners(store.dispatch);
