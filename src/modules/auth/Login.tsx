@@ -17,6 +17,7 @@ interface IdealLocationState {
 type LocationState = IdealLocationState | null;
 
 const Login = () => {
+  localStorage.setItem('rememberMe', 'false');
   const navigate = useNavigate();
   const location = useLocation();
   const [loginUser, { isLoading }] = useLoginMutation();
@@ -33,14 +34,21 @@ const Login = () => {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const rememberMe = localStorage.getItem('rememberMe');
 
     if (email && password) {
       await loginUser({ email, password })
         .unwrap()
         .then((payload) => {
-          localStorage.setItem('accessToken', payload.tokens.access.token);
-          localStorage.setItem('refreshToken', payload.tokens.refresh.token);
-          localStorage.setItem('userId', payload.user.id);
+          if (rememberMe === 'true') {
+            localStorage.setItem('accessToken', payload.tokens.access.token);
+            localStorage.setItem('refreshToken', payload.tokens.refresh.token);
+            localStorage.setItem('userId', payload.user.id);
+          } else {
+            sessionStorage.setItem('accessToken', payload.tokens.access.token);
+            sessionStorage.setItem('refreshToken', payload.tokens.refresh.token);
+            sessionStorage.setItem('userId', payload.user.id);
+          }
           clearFields();
           navigate(previousLocationState?.from.pathname || '/', { replace: true });
         });
@@ -98,7 +106,17 @@ const Login = () => {
                     </Form.Group>
                     <div className="d-flex justify-content-between align-items-center mb-4">
                       <Form.Check type="checkbox">
-                        <FormCheck.Input id="defaultCheck5" className="me-2" />
+                        <FormCheck.Input
+                          id="defaultCheck5"
+                          className="me-2"
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              localStorage.setItem('rememberMe', 'true');
+                            } else {
+                              localStorage.setItem('rememberMe', 'false');
+                            }
+                          }}
+                        />
                         <FormCheck.Label htmlFor="defaultCheck5" className="mb-0">
                           Remember me
                         </FormCheck.Label>

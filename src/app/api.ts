@@ -7,7 +7,7 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_APIKEY,
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken');
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -26,7 +26,8 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const rememberMe = localStorage.getItem('rememberMe');
+        const refreshToken = sessionStorage.getItem('refreshToken') || localStorage.getItem('refreshToken');
 
         if (refreshToken) {
           // try to get a new token
@@ -41,9 +42,15 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
           );
           if (refreshResult.data) {
             const userWithTokens = refreshResult.data as IUserWithTokens;
-            localStorage.setItem('accessToken', userWithTokens.tokens.access.token);
-            localStorage.setItem('refreshToken', userWithTokens.tokens.refresh.token);
-            localStorage.setItem('userId', userWithTokens.user.id);
+            if (rememberMe === 'true') {
+              localStorage.setItem('accessToken', userWithTokens.tokens.access.token);
+              localStorage.setItem('refreshToken', userWithTokens.tokens.refresh.token);
+              localStorage.setItem('userId', userWithTokens.user.id);
+            } else {
+              sessionStorage.setItem('accessToken', userWithTokens.tokens.access.token);
+              sessionStorage.setItem('refreshToken', userWithTokens.tokens.refresh.token);
+              sessionStorage.setItem('userId', userWithTokens.user.id);
+            }
           } else {
             api.dispatch(logout());
           }

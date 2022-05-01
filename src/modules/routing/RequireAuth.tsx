@@ -10,7 +10,7 @@ type Props = {
 
 const RequireAuth = ({ element, restrictedTo }: Props) => {
   const location = useLocation();
-  const id = localStorage.getItem('userId');
+  const id = sessionStorage.getItem('userId') || localStorage.getItem('userId');
   if (id) {
     const { data: user, isLoading } = useGetSingleUserQuery({ id });
 
