@@ -9,6 +9,7 @@
   - [ ] Profile
 - [x] Add routing for pages
 - [x] Add routing auth
+- [ ] Add remember me
 
 ### Users Tasks
 

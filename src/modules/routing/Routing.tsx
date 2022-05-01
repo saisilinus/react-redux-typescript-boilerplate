@@ -6,11 +6,12 @@ import { DashboardHome, Profile } from '../dashboard';
 import Home from '../home/Home';
 import restrictions from './restrictions';
 import routes from './routes';
+import Layout from '../common/layout/Layout';
 
 const Routing = () => {
   return (
     <Routes>
-      <Route path={routes.Home.path}>
+      <Route path={routes.Home.path} element={<Layout />}>
         <Route index element={<Home />} />
         <Route path={routes.Login.path} element={<Login />} />
         <Route path={routes.Register.path} element={<Register />} />

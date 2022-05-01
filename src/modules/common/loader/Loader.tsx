@@ -2,11 +2,11 @@ import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
 type Props = {
-  hide: boolean;
+  show?: boolean;
 };
 
-const Loader = ({ hide }: Props) => (
-  <div className={`loader ${hide ? 'hide' : ''}`}>
+const Loader = ({ show }: Props) => (
+  <div className={`loader ${show ? '' : 'hide'}`}>
     <Spinner animation="grow" role="status" className="loader-element" />
   </div>
 );

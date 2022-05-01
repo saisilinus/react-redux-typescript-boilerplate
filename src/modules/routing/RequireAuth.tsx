@@ -12,11 +12,9 @@ const RequireAuth = ({ element, restrictedTo }: Props) => {
   const location = useLocation();
   const id = localStorage.getItem('userId');
   if (id) {
-    const { data: user, isLoading, isError } = useGetSingleUserQuery({ id });
+    const { data: user, isLoading } = useGetSingleUserQuery({ id });
 
-    if (isLoading) return <Loader hide={!isLoading} />;
-
-    if (isError) return <div>An error has occurred!</div>;
+    if (isLoading) return <Loader />;
 
     if (!user || !restrictedTo.includes(user.role)) {
       return <Navigate to="/login" state={{ from: location }} replace />;

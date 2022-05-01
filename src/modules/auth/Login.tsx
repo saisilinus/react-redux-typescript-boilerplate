@@ -6,7 +6,7 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from '@fortawesome/free-solid-sv
 import BgImage from '../../assets/img/illustrations/signin.svg';
 import { routes } from '../routing';
 import { useLoginMutation } from './auth.api';
-import NotifyContainer from '../common/toast/Notify';
+import Loader from '../common/loader/Loader';
 
 interface IdealLocationState {
   from: {
@@ -19,7 +19,7 @@ type LocationState = IdealLocationState | null;
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [loginUser] = useLoginMutation();
+  const [loginUser, { isLoading }] = useLoginMutation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,17 +43,13 @@ const Login = () => {
           localStorage.setItem('userId', payload.user.id);
           clearFields();
           navigate(previousLocationState?.from.pathname || '/', { replace: true });
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.error('rejected', error);
         });
     }
   }
 
   return (
     <main>
-      <NotifyContainer />
+      <Loader show={isLoading} />
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">

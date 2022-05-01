@@ -39,6 +39,7 @@
     ],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-undef": "off",
-    "react/jsx-no-bind": [ "error", { "allowFunctions" : true, "allowArrowFunctions": true } ]
+    "react/jsx-no-bind": [ "error", { "allowFunctions" : true, "allowArrowFunctions": true } ],
+    "react/require-default-props": [ 0 ]
   }
 }
