@@ -1,15 +1,14 @@
 ### Auth Tasks
 
-- [ ] Create Auth Pages
-  - [ ] Login
-  - [ ] Register
-  - [ ] Reset Password
-  - [ ] Verify Email
-  - [ ] Lock
-  - [ ] Profile
+- [x] Create Auth Pages
+  - [x] Login
+  - [x] Register
+  - [x] Reset Password
+  - [x] Verify Email
+  - [x] Profile
 - [x] Add routing for pages
 - [x] Add routing auth
-- [ ] Add remember me
+- [x] Add remember me
 
 ### Users Tasks
 
