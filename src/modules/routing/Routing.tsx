@@ -27,7 +27,7 @@ const Routing = () => {
         }
       }}
     >
-      <Routes>
+      <Routes location={displayLocation}>
         <Route path={routes.Home.path} element={<Layout />}>
           <Route index element={<Home />} />
           <Route path={routes.Login.path} element={<Login />} />
