@@ -1,6 +1,4 @@
 // eslint-disable-next-line import/no-cycle
-export { default as authReducer } from './auth.slice';
-// eslint-disable-next-line import/no-cycle
 export { default as authApi } from './auth.api';
 export { default as Lock } from './Lock';
 export { default as Login } from './Login';

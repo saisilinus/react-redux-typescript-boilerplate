@@ -3,14 +3,12 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
 // eslint-disable-next-line import/no-cycle
 import api from './api';
 
-// reducers
-import { authReducer } from '../modules/auth';
+// middleware
 import { rtkQueryErrorLogger } from '../modules/common/toast/Notify';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware, rtkQueryErrorLogger),
 });

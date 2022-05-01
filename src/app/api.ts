@@ -1,9 +1,18 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
-import { logout } from '../modules/auth/auth.slice';
 import { IUserWithTokens } from '../modules/auth/auth.types';
 
 const mutex = new Mutex();
+
+const resetAuth = (): void => {
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('userId');
+  sessionStorage.removeItem('accessToken');
+  sessionStorage.removeItem('refreshToken');
+  sessionStorage.removeItem('userId');
+};
+
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_APIKEY,
   prepareHeaders: (headers) => {
@@ -52,7 +61,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
               sessionStorage.setItem('userId', userWithTokens.user.id);
             }
           } else {
-            api.dispatch(logout());
+            resetAuth();
           }
         }
       } finally {
