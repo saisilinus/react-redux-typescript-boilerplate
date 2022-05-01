@@ -35,23 +35,21 @@ const Login = () => {
     event.preventDefault();
     const rememberMe = localStorage.getItem('rememberMe');
 
-    if (email && password) {
-      await loginUser({ email, password })
-        .unwrap()
-        .then((payload) => {
-          if (rememberMe === 'true') {
-            localStorage.setItem('accessToken', payload.tokens.access.token);
-            localStorage.setItem('refreshToken', payload.tokens.refresh.token);
-            localStorage.setItem('userId', payload.user.id);
-          } else {
-            sessionStorage.setItem('accessToken', payload.tokens.access.token);
-            sessionStorage.setItem('refreshToken', payload.tokens.refresh.token);
-            sessionStorage.setItem('userId', payload.user.id);
-          }
-          clearFields();
-          navigate(previousLocationState?.from.pathname || '/', { replace: true });
-        });
-    }
+    await loginUser({ email, password })
+      .unwrap()
+      .then((payload) => {
+        if (rememberMe === 'true') {
+          localStorage.setItem('accessToken', payload.tokens.access.token);
+          localStorage.setItem('refreshToken', payload.tokens.refresh.token);
+          localStorage.setItem('userId', payload.user.id);
+        } else {
+          sessionStorage.setItem('accessToken', payload.tokens.access.token);
+          sessionStorage.setItem('refreshToken', payload.tokens.refresh.token);
+          sessionStorage.setItem('userId', payload.user.id);
+        }
+        clearFields();
+        navigate(previousLocationState?.from.pathname || '/', { replace: true });
+      });
   }
 
   return (

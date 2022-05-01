@@ -1,11 +1,11 @@
-import { faEnvelope, faUnlockAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faEnvelope, faUnlockAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import Loader from '../common/loader/Loader';
 import { useRegisterMutation } from './auth.api';
+import { routes } from '../routing';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -17,10 +17,6 @@ const Register = () => {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const rememberMe = localStorage.getItem('rememberMe');
-
-    if (name === '' || email === '' || password === '') {
-      toast('Please fill in the values first');
-    }
 
     await registerUser({ name, email, password })
       .unwrap()
@@ -43,6 +39,11 @@ const Register = () => {
       <Loader show={isLoading} />
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
+          <p className="text-center">
+            <Card.Link as={Link} to={`/${routes.Login.path}`} className="text-dark">
+              <FontAwesomeIcon icon={faAngleLeft} className="me-2" /> Back to login
+            </Card.Link>
+          </p>
           <Row className="justify-content-center">
             <Col xs={12} className="d-flex align-items-center justify-content-center">
               <div className="bg-white border rounded border-light p-4 p-lg-5 w-lg-50 w-md-100">
