@@ -13,3 +13,29 @@
     -ms-transition: $property $time $type;
     transition: $property $time $type;
 }
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }  
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }  
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animate($animation,$duration,$method, $fill-mode) {
+    -webkit-animation: #{$animation $duration $method $fill-mode};
+    -moz-animation: #{$animation $duration $method $fill-mode};
+    -ms-animation: #{$animation $duration $method $fill-mode};
+    -o-animation: #{$animation $duration $method $fill-mode};
+    animation: #{$animation $duration $method $fill-mode};
+}
