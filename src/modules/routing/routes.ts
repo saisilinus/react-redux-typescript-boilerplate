@@ -12,6 +12,7 @@ interface IRoutes {
   VerifyEmail: IRoutePath;
   NotFound: IRoutePath;
   Dashboard: IRoutePath;
+  ForgotPassword: IRoutePath;
 }
 
 const routes: IRoutes = {
@@ -24,6 +25,7 @@ const routes: IRoutes = {
   VerifyEmail: { path: 'verify-email' },
   NotFound: { path: 'not-found' },
   Dashboard: { path: 'dashboard' },
+  ForgotPassword: { path: 'forgot-password' },
 };
 
 export default routes;

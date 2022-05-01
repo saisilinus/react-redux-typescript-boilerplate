@@ -118,7 +118,9 @@ const Login = () => {
                           Remember me
                         </FormCheck.Label>
                       </Form.Check>
-                      <Card.Link className="small text-end">Lost password?</Card.Link>
+                      <Card.Link as={Link} to={`/${routes.ForgotPassword.path}`} className="small text-end">
+                        Lost password?
+                      </Card.Link>
                     </div>
                   </Form.Group>
                   <Button variant="primary" type="submit" className="w-100">

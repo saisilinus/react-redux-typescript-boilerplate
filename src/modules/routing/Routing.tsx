@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
-import { Lock, Login, NotFound, Register, ResetPassword, VerifyEmail } from '../auth';
+import { ForgotPassword, Lock, Login, NotFound, Register, ResetPassword, VerifyEmail } from '../auth';
 import { DashboardHome, Profile } from '../dashboard';
 import Home from '../home/Home';
 import restrictions from './restrictions';
@@ -34,6 +34,7 @@ const Routing = () => {
           <Route path={routes.Register.path} element={<Register />} />
           <Route path={routes.Lock.path} element={<Lock />} />
           <Route path={routes.ResetPassword.path} element={<ResetPassword />} />
+          <Route path={routes.ForgotPassword.path} element={<ForgotPassword />} />
           <Route path={routes.VerifyEmail.path} element={<VerifyEmail />} />
           <Route path={routes.Dashboard.path}>
             <Route index element={<RequireAuth element={<DashboardHome />} restrictedTo={restrictions.none} />} />
