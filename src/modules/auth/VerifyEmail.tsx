@@ -6,7 +6,7 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import Loader from '../common/loader/Loader';
 import { useVerifyEmailMutation } from './auth.api';
-import { routes } from '../routing';
+import routes from '../routing/routes';
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();

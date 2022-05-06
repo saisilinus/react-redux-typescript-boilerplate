@@ -6,7 +6,7 @@ import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-boots
 import { toast } from 'react-toastify';
 import Loader from '../common/loader/Loader';
 import { useResetPasswordMutation } from './auth.api';
-import { routes } from '../routing';
+import routes from '../routing/routes';
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();

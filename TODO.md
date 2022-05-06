@@ -55,3 +55,4 @@
 - [x] Add error handling
   - [x] Add error handling component
   - [x] Add error handling logic
+- [ ] Add Scroll to top

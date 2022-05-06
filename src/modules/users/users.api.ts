@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import api from '../../app/api';
 import {
   ICreateUserRequest,
@@ -5,15 +6,15 @@ import {
   IGetSingleUserRequest,
   IGetUsersRequestParams,
   IUpdateUserRequest,
-  IUser,
   IUserQueryResults,
+  IUserWithoutPassword,
 } from './users.types';
 
 const apiWithUserTags = api.enhanceEndpoints({ addTagTypes: ['User'] });
 
 const userApi = apiWithUserTags.injectEndpoints({
   endpoints: (builder) => ({
-    createUser: builder.mutation<IUser, ICreateUserRequest>({
+    createUser: builder.mutation<IUserWithoutPassword, ICreateUserRequest>({
       query: (body) => ({
         url: 'users',
         method: 'POST',
@@ -30,14 +31,14 @@ const userApi = apiWithUserTags.injectEndpoints({
       providesTags: (data) =>
         data && data.results ? [...data.results.map(({ id }) => ({ type: 'User' as const, id })), 'User'] : ['User'],
     }),
-    getSingleUser: builder.query<IUser, IGetSingleUserRequest>({
+    getSingleUser: builder.query<IUserWithoutPassword, IGetSingleUserRequest>({
       query: ({ id }) => ({
         url: `users/${id}`,
         method: 'GET',
       }),
       providesTags: (result) => (result ? [{ type: 'User', id: result.id }] : ['User']),
     }),
-    updateUser: builder.mutation<IUser, IUpdateUserRequest>({
+    updateUser: builder.mutation<IUserWithoutPassword, IUpdateUserRequest>({
       query: ({ id, body }) => ({
         url: `users/${id}`,
         method: 'PATCH',
@@ -54,6 +55,21 @@ const userApi = apiWithUserTags.injectEndpoints({
     }),
   }),
 });
+
+export const getLoggedInUser = (): IUserWithoutPassword | null => {
+  let user: IUserWithoutPassword | null = null;
+  const id = sessionStorage.getItem('userId') || localStorage.getItem('userId');
+
+  if (id) {
+    const selectUser = userApi.endpoints.getSingleUser.select({ id });
+    const { data } = useSelector(selectUser);
+    if (data) {
+      user = data;
+    }
+  }
+
+  return user;
+};
 
 export const {
   useCreateUserMutation,

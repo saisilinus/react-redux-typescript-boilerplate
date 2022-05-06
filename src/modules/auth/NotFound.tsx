@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import NotFoundImage from '../../assets/img/illustrations/404.svg';
-import { routes } from '../routing';
+import routes from '../routing/routes';
 
 const NotFound = () => {
   const navigate = useNavigate();

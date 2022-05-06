@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 import Loader from '../common/loader/Loader';
 import { useRegisterMutation } from './auth.api';
-import { routes } from '../routing';
+import routes from '../routing/routes';
 
 const Register = () => {
   const [name, setName] = useState('');

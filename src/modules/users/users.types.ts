@@ -11,8 +11,10 @@ export interface IUser extends IDoc {
   isEmailVerified: boolean;
 }
 
+export type IUserWithoutPassword = Omit<IUser, 'password'>;
+
 export interface IUserQueryResults extends IQueryResult {
-  results: IUser[];
+  results: IUserWithoutPassword[];
 }
 
 export type ICreateUserRequest = Omit<IUser, 'id' | 'isEmailVerified'>;

@@ -1,0 +1,51 @@
+@include media-breakpoint-up(md) {
+    .full-height-drawer {
+        height: 100vh;
+    }
+}
+
+.force-left {
+    text-align: left !important;
+}
+
+.drawer-sidebar {
+    .sidebar-text {
+        color: white;
+        @include transitions(0.5s, ease);
+
+        &:hover {
+            color: yellow;
+        }
+    }
+
+    .sidebar-icon {
+        margin-right: .5rem;
+        color: $white;
+        @include transitions(0.5s, ease);
+
+        span {
+            min-width: 22px;
+        }
+
+        svg {
+            min-width: 22px;
+        }
+
+        &.svg-icon {
+            margin-right:14px;
+        }
+
+        &:hover {
+            color: yellow;
+        }
+    }
+
+    .nav-item {
+        border: 0;
+        @include transitions(0.5s, ease);
+
+        &.active {
+            border: 1px solid yellow;
+        }
+    }
+}
