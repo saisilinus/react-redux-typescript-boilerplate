@@ -15,7 +15,7 @@ const NotFound = () => {
           <Row>
             <Col xs={12} className="text-center d-flex align-items-center justify-content-center">
               <div>
-                <Card.Link as={Link} to={routes.Home.path}>
+                <Card.Link as={Link} to={routes.Home.relativePath}>
                   <Image src={NotFoundImage} className="img-fluid w-75" style={{ maxHeight: '50vh' }} />
                 </Card.Link>
                 <h1 className="text-primary mt-5">
@@ -24,7 +24,7 @@ const NotFound = () => {
                 <p className="lead my-4">
                   Oops! Looks like you followed a bad link. If you think this is a problem with us, please tell us.
                 </p>
-                <Button variant="primary" className="animate-hover" onClick={() => navigate(routes.Home.path)}>
+                <Button variant="primary" className="animate-hover" onClick={() => navigate(routes.Home.relativePath)}>
                   <FontAwesomeIcon icon={faChevronLeft} className="animate-left-3 me-3 ms-2" />
                   Go back home
                 </Button>

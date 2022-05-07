@@ -1,5 +1,6 @@
 interface IRoutePath {
-  path: string;
+  relativePath: string;
+  absolutePath: string;
 }
 
 interface IRoutes {
@@ -16,16 +17,16 @@ interface IRoutes {
 }
 
 const routes: IRoutes = {
-  Home: { path: '/' },
-  Login: { path: 'login' },
-  Register: { path: 'register' },
-  Lock: { path: 'lock' },
-  Profile: { path: 'profile' },
-  ResetPassword: { path: 'reset-password' },
-  VerifyEmail: { path: 'verify-email' },
-  NotFound: { path: 'not-found' },
-  Dashboard: { path: 'dashboard' },
-  ForgotPassword: { path: 'forgot-password' },
+  Home: { relativePath: '/', absolutePath: '/' },
+  Login: { relativePath: 'login', absolutePath: '/login' },
+  Register: { relativePath: 'register', absolutePath: '/register' },
+  Lock: { relativePath: 'lock', absolutePath: '/lock' },
+  ResetPassword: { relativePath: 'reset-password', absolutePath: '/reset-password' },
+  VerifyEmail: { relativePath: 'verify-email', absolutePath: '/verify-email' },
+  NotFound: { relativePath: 'not-found', absolutePath: '/not-found' },
+  Dashboard: { relativePath: 'dashboard', absolutePath: '/dashboard' },
+  Profile: { relativePath: 'profile', absolutePath: '/dashboard/profile' },
+  ForgotPassword: { relativePath: 'forgot-password', absolutePath: '/forgot-password' },
 };
 
 export default routes;

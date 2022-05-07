@@ -16,19 +16,19 @@ const Routing = () => {
     <TransitionGroup component={null}>
       <CSSTransition key={location.key} classNames="fade" timeout={500}>
         <Routes>
-          <Route path={routes.Home.path} element={<Layout />}>
+          <Route path={routes.Home.relativePath} element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path={routes.Login.path} element={<Login />} />
-            <Route path={routes.Register.path} element={<Register />} />
-            <Route path={routes.ResetPassword.path} element={<ResetPassword />} />
-            <Route path={routes.ForgotPassword.path} element={<ForgotPassword />} />
-            <Route path={routes.VerifyEmail.path} element={<VerifyEmail />} />
+            <Route path={routes.Login.relativePath} element={<Login />} />
+            <Route path={routes.Register.relativePath} element={<Register />} />
+            <Route path={routes.ResetPassword.relativePath} element={<ResetPassword />} />
+            <Route path={routes.ForgotPassword.relativePath} element={<ForgotPassword />} />
+            <Route path={routes.VerifyEmail.relativePath} element={<VerifyEmail />} />
           </Route>
           <Route element={<SidebarLayout />}>
-            <Route path={`/${routes.Dashboard.path}`}>
+            <Route path={routes.Dashboard.absolutePath}>
               <Route index element={<RequireAuth element={<DashboardHome />} restrictedTo={restrictions.none} />} />
               <Route
-                path={routes.Profile.path}
+                path={routes.Profile.relativePath}
                 element={<RequireAuth element={<Profile />} restrictedTo={restrictions.none} />}
               />
             </Route>

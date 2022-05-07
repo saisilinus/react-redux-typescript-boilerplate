@@ -25,7 +25,7 @@ const ResetPassword = () => {
         .unwrap()
         .then(() => {
           toast('Password reset was successful. Please try logging in again');
-          navigate(`/${routes.Login.path}`);
+          navigate(routes.Login.absolutePath);
         });
     }
   }
@@ -36,7 +36,7 @@ const ResetPassword = () => {
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
-            <Card.Link as={Link} to={`/${routes.Login.path}`} className="text-dark">
+            <Card.Link as={Link} to={routes.Login.absolutePath} className="text-dark">
               <FontAwesomeIcon icon={faAngleLeft} className="me-2" /> Back to login
             </Card.Link>
           </p>

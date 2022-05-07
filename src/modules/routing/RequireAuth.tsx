@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import Loader from '../common/loader/Loader';
 import { useGetSingleUserQuery } from '../users/users.api';
+import routes from './routes';
 
 type Props = {
   element: JSX.Element;
@@ -17,10 +18,10 @@ const RequireAuth = ({ element, restrictedTo }: Props) => {
     if (isLoading) return <Loader />;
 
     if (!user || !restrictedTo.includes(user.role)) {
-      return <Navigate to="/login" state={{ from: location }} replace />;
+      return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace />;
     }
   } else if (!id) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace />;
   }
 
   return element;

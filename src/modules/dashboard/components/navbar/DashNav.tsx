@@ -34,7 +34,7 @@ const DashNav = () => {
           sessionStorage.removeItem('accessToken');
           sessionStorage.removeItem('refreshToken');
           sessionStorage.removeItem('userId');
-          navigate(`/${routes.Login.path}`, { replace: true, state: { from: location } });
+          navigate(routes.Login.absolutePath, { replace: true, state: { from: location } });
         });
     }
   }
@@ -67,7 +67,7 @@ const DashNav = () => {
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="user-dropdown dropdown-menu-left mt-2" align="end">
-                  <Dropdown.Item className="fw-bold" as={Link} to={`/${routes.Dashboard.path}/${routes.Profile.path}`}>
+                  <Dropdown.Item className="fw-bold" as={Link} to={routes.Profile.absolutePath}>
                     <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My Profile
                   </Dropdown.Item>
                   <Dropdown.Item className="fw-bold">

@@ -58,7 +58,7 @@ const Login = () => {
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <Container>
           <p className="text-center">
-            <Card.Link as={Link} to={routes.Home.path} className="text-dark">
+            <Card.Link as={Link} to={routes.Home.relativePath} className="text-dark">
               <FontAwesomeIcon icon={faAngleLeft} className="me-2" /> Back to homepage
             </Card.Link>
           </p>
@@ -118,7 +118,7 @@ const Login = () => {
                           Remember me
                         </FormCheck.Label>
                       </Form.Check>
-                      <Card.Link as={Link} to={`/${routes.ForgotPassword.path}`} className="small text-end">
+                      <Card.Link as={Link} to={routes.ForgotPassword.absolutePath} className="small text-end">
                         Lost password?
                       </Card.Link>
                     </div>
@@ -130,7 +130,7 @@ const Login = () => {
                 <div className="d-flex justify-content-center align-items-center mt-4">
                   <span className="fw-normal">
                     Not registered?
-                    <Card.Link as={Link} to={`/${routes.Register.path}`} className="fw-bold">
+                    <Card.Link as={Link} to={routes.Register.absolutePath} className="fw-bold">
                       {` Create account `}
                     </Card.Link>
                   </span>

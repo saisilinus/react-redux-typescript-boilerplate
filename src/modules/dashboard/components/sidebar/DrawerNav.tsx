@@ -29,13 +29,8 @@ const DrawerNav = () => {
             </Drawer.Header>
 
             <Drawer.Nav>
-              <NavItem title="Overview" link={`/${routes.Dashboard.path}`} pathname={location.pathname} icon={faHome} />
-              <NavItem
-                title="Profile"
-                link={`/${routes.Dashboard.path}/${routes.Profile.path}`}
-                pathname={location.pathname}
-                icon={faCog}
-              />
+              <NavItem title="Overview" link={routes.Dashboard.absolutePath} pathname={location.pathname} icon={faHome} />
+              <NavItem title="Profile" link={routes.Profile.absolutePath} pathname={location.pathname} icon={faCog} />
             </Drawer.Nav>
           </Drawer.ToC>
         </Drawer.Overflow>
