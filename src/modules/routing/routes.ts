@@ -14,6 +14,7 @@ interface IRoutes {
   NotFound: IRoutePath;
   Dashboard: IRoutePath;
   ForgotPassword: IRoutePath;
+  UserList: IRoutePath;
 }
 
 const routes: IRoutes = {
@@ -27,6 +28,7 @@ const routes: IRoutes = {
   Dashboard: { relativePath: 'dashboard', absolutePath: '/dashboard' },
   Profile: { relativePath: 'profile', absolutePath: '/dashboard/profile' },
   ForgotPassword: { relativePath: 'forgot-password', absolutePath: '/forgot-password' },
+  UserList: { relativePath: 'user-list', absolutePath: '/dashboard/user-list' },
 };
 
 export default routes;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
+import NotifyContainer from '../../../common/toast/Notify';
 import Footer from '../footer/Footer';
 import DashNav from '../navbar/DashNav';
 
@@ -8,8 +9,9 @@ import DrawerNav from '../sidebar/DrawerNav';
 
 const SidebarLayout = () => {
   return (
-    <Container fluid>
-      <Row className="flex-xl-nowrap">
+    <Container fluid className="px-0">
+      <NotifyContainer />
+      <Row className="flex-xl-nowrap" style={{ height: '100vh' }}>
         <Col xs={12} md={3} lg={2} className="px-0">
           <DrawerNav />
         </Col>

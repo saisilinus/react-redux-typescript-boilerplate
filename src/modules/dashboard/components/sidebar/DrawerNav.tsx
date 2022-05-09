@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Drawer } from 'react-bootstrap-drawer';
 import { Collapse } from 'react-bootstrap';
-import { faCog, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faExternalLinkAlt, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavItem from './NavItem';
 
@@ -20,7 +20,7 @@ const DrawerNav = () => {
       <Drawer.Toggle onClick={handleToggle} className="text-white force-left ms-3" />
       <Collapse in={open}>
         <Drawer.Overflow>
-          <Drawer.ToC>
+          <Drawer.ToC className="ps-3">
             <Drawer.Header href="/" className="text-white mb-3">
               <span className="sidebar-icon">
                 <FontAwesomeIcon icon={faExternalLinkAlt} />{' '}
@@ -31,6 +31,7 @@ const DrawerNav = () => {
             <Drawer.Nav>
               <NavItem title="Overview" link={routes.Dashboard.absolutePath} pathname={location.pathname} icon={faHome} />
               <NavItem title="Profile" link={routes.Profile.absolutePath} pathname={location.pathname} icon={faCog} />
+              <NavItem title="Users" link={routes.UserList.absolutePath} pathname={location.pathname} icon={faUser} />
             </Drawer.Nav>
           </Drawer.ToC>
         </Drawer.Overflow>

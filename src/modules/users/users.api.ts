@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import api from '../../app/api';
+import { IQueryResults } from '../common/definitions';
 import {
   ICreateUserRequest,
   IDeleteUserRequest,
   IGetSingleUserRequest,
   IGetUsersRequestParams,
   IUpdateUserRequest,
-  IUserQueryResults,
   IUserWithoutPassword,
 } from './users.types';
 
@@ -22,14 +22,16 @@ const userApi = apiWithUserTags.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
-    getUsers: builder.query<IUserQueryResults, IGetUsersRequestParams>({
+    getUsers: builder.query<IQueryResults<IUserWithoutPassword>, IGetUsersRequestParams>({
       query: (params) => ({
         url: 'users',
         method: 'GET',
         params,
       }),
       providesTags: (data) =>
-        data && data.results ? [...data.results.map(({ id }) => ({ type: 'User' as const, id })), 'User'] : ['User'],
+        data && data.results
+          ? [...data.results.map(({ id }) => ({ type: 'User' as const, id })), { type: 'User', id: 'PARTIAL-USER-LIST' }]
+          : [{ type: 'User', id: 'PARTIAL-USER-LIST' }],
     }),
     getSingleUser: builder.query<IUserWithoutPassword, IGetSingleUserRequest>({
       query: ({ id }) => ({
@@ -44,14 +46,20 @@ const userApi = apiWithUserTags.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'User', id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'User', id: arg.id },
+        { type: 'User', id: 'PARTIAL-USER-LIST' },
+      ],
     }),
     deleteUser: builder.mutation<void, IDeleteUserRequest>({
       query: ({ id }) => ({
         url: `users/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'User', id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: 'User', id: arg.id },
+        { type: 'User', id: 'PARTIAL-USER-LIST' },
+      ],
     }),
   }),
 });

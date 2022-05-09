@@ -9,6 +9,7 @@ import restrictions from './restrictions';
 import routes from './routes';
 import Layout from '../common/layout/Layout';
 import SidebarLayout from '../dashboard/components/layout/SidebarLayout';
+import UserList from '../users/UserList';
 
 const Routing = () => {
   const location = useLocation();
@@ -30,6 +31,10 @@ const Routing = () => {
               <Route
                 path={routes.Profile.relativePath}
                 element={<RequireAuth element={<Profile />} restrictedTo={restrictions.none} />}
+              />
+              <Route
+                path={routes.UserList.relativePath}
+                element={<RequireAuth element={<UserList />} restrictedTo={restrictions.admin} />}
               />
             </Route>
           </Route>
