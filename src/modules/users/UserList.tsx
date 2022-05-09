@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup, Col, Dropdown, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import { faCheck, faPlus, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SingleUserRow from './SingleUserRow';
 import { useGetUsersQuery } from './users.api';
 import Paginate from '../common/pagination/Paginate';
+import routes from '../routing/routes';
 
 const LimitItem = ({ limit, currentLimit, onClick }: { limit: number; currentLimit: number; onClick: () => void }) => (
   <Dropdown.Item className="fw-bold" onClick={onClick}>
@@ -20,6 +22,7 @@ const LimitItem = ({ limit, currentLimit, onClick }: { limit: number; currentLim
 );
 
 const UserList = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentLimit, setCurrentLimit] = useState<number>(10);
   const { data } = useGetUsersQuery({ page: currentPage, limit: currentLimit });
@@ -39,7 +42,7 @@ const UserList = () => {
           <h4>Users List</h4>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
-          <Button variant="primary" size="sm">
+          <Button variant="primary" size="sm" onClick={() => navigate(routes.NewUser.relativePath)}>
             <FontAwesomeIcon icon={faPlus} className="me-2" /> Add New User
           </Button>
         </div>

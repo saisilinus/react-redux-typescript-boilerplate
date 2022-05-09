@@ -15,6 +15,7 @@ interface IRoutes {
   Dashboard: IRoutePath;
   ForgotPassword: IRoutePath;
   UserList: IRoutePath;
+  NewUser: IRoutePath;
 }
 
 const routes: IRoutes = {
@@ -29,6 +30,7 @@ const routes: IRoutes = {
   Profile: { relativePath: 'profile', absolutePath: '/dashboard/profile' },
   ForgotPassword: { relativePath: 'forgot-password', absolutePath: '/forgot-password' },
   UserList: { relativePath: 'user-list', absolutePath: '/dashboard/user-list' },
+  NewUser: { relativePath: 'new', absolutePath: '/dashboard/user-list/new' },
 };
 
 export default routes;

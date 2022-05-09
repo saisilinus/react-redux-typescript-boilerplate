@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Drawer } from 'react-bootstrap-drawer';
 import { Collapse } from 'react-bootstrap';
-import { faCog, faExternalLinkAlt, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faExternalLinkAlt, faHome, faList, faPlus, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavItem from './NavItem';
 
 import routes from '../../../routing/routes';
+import CollapsibleNavItem from './CollapsibleNavItem';
 
 const DrawerNav = () => {
   const location = useLocation();
@@ -31,7 +32,10 @@ const DrawerNav = () => {
             <Drawer.Nav>
               <NavItem title="Overview" link={routes.Dashboard.absolutePath} pathname={location.pathname} icon={faHome} />
               <NavItem title="Profile" link={routes.Profile.absolutePath} pathname={location.pathname} icon={faCog} />
-              <NavItem title="Users" link={routes.UserList.absolutePath} pathname={location.pathname} icon={faUser} />
+              <CollapsibleNavItem title="Users" eventKey="dashboard-users" pathname={location.pathname} icon={faUser}>
+                <NavItem title="Add New" link={routes.NewUser.absolutePath} pathname={location.pathname} icon={faPlus} />
+                <NavItem title="List" link={routes.UserList.absolutePath} pathname={location.pathname} icon={faList} />
+              </CollapsibleNavItem>
             </Drawer.Nav>
           </Drawer.ToC>
         </Drawer.Overflow>

@@ -10,6 +10,7 @@ import routes from './routes';
 import Layout from '../common/layout/Layout';
 import SidebarLayout from '../dashboard/components/layout/SidebarLayout';
 import UserList from '../users/UserList';
+import NewUser from '../users/NewUser';
 
 const Routing = () => {
   const location = useLocation();
@@ -32,10 +33,13 @@ const Routing = () => {
                 path={routes.Profile.relativePath}
                 element={<RequireAuth element={<Profile />} restrictedTo={restrictions.none} />}
               />
-              <Route
-                path={routes.UserList.relativePath}
-                element={<RequireAuth element={<UserList />} restrictedTo={restrictions.admin} />}
-              />
+              <Route path={routes.UserList.relativePath}>
+                <Route index element={<RequireAuth element={<UserList />} restrictedTo={restrictions.admin} />} />
+                <Route
+                  path={routes.NewUser.relativePath}
+                  element={<RequireAuth element={<NewUser />} restrictedTo={restrictions.admin} />}
+                />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
