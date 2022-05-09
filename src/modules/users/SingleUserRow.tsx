@@ -3,13 +3,16 @@ import {
   faEllipsisH,
   faEye,
   faInfoCircle,
+  faMailForward,
   faTimesCircle,
   faUserShield,
-  faUserTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Button, ButtonGroup, Card, Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { useForgotPasswordMutation, useSendVerificationEmailMutation } from '../auth/auth.api';
+import { useDeleteUserMutation } from './users.api';
 import { IUserWithoutPassword } from './users.types';
 
 type Props = {
@@ -17,13 +20,36 @@ type Props = {
 };
 
 const SingleUserRow = ({ user }: Props) => {
+  const [deleteUser, { isLoading }] = useDeleteUserMutation();
+  const [sendForgotPassword, { isLoading: resettingPassword }] = useForgotPasswordMutation();
+  const [sendVerificationEmail, { isLoading: sending }] = useSendVerificationEmailMutation();
   const nameFirstLetters = user.name
     .split(' ')
     .map((i) => i.charAt(0))
     .join('')
     .toUpperCase();
   const verifiedIcon = user.isEmailVerified ? faCheckCircle : faInfoCircle;
-  const verifiedVariant = user.isEmailVerified ? 'success' : 'primary';
+  const verifiedVariant = user.isEmailVerified ? 'success' : 'danger';
+
+  const handleDelete = async () => {
+    await deleteUser({ id: user.id });
+  };
+
+  const handleResetPassword = async () => {
+    await sendForgotPassword({ email: user.email })
+      .unwrap()
+      .then(() => {
+        toast.success('Reset Password email sent successfully');
+      });
+  };
+
+  const handleSendVerificationEmail = async () => {
+    await sendVerificationEmail()
+      .unwrap()
+      .then(() => {
+        toast.success('Verification email sent successfully');
+      });
+  };
 
   return (
     <tr key={user.id}>
@@ -55,22 +81,39 @@ const SingleUserRow = ({ user }: Props) => {
             </span>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>
-              <FontAwesomeIcon icon={faUserShield} className="me-2" /> Reset Pass
+            <Dropdown.Item disabled={resettingPassword} onClick={!resettingPassword ? handleResetPassword : () => {}}>
+              {resettingPassword ? (
+                'Resetting...'
+              ) : (
+                <span>
+                  <FontAwesomeIcon icon={faUserShield} className="me-2" /> Reset Pass{' '}
+                </span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item disabled={sending} onClick={!sending ? handleSendVerificationEmail : () => {}}>
+              {sending ? (
+                'Sending...'
+              ) : (
+                <span>
+                  <FontAwesomeIcon icon={faMailForward} className="me-2" /> Verify Email{' '}
+                </span>
+              )}
             </Dropdown.Item>
             <Dropdown.Item>
               <FontAwesomeIcon icon={faEye} className="me-2" /> View Details
-            </Dropdown.Item>
-            <Dropdown.Item className="text-danger">
-              <FontAwesomeIcon icon={faUserTimes} className="me-2" /> Suspend
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
         <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={<Tooltip>Delete</Tooltip>}>
-          <Card.Link className="text-danger ms-2">
-            <FontAwesomeIcon icon={faTimesCircle} />
-          </Card.Link>
+          <Button
+            variant="link"
+            disabled={isLoading}
+            className="text-danger ms-2"
+            onClick={!isLoading ? handleDelete : () => {}}
+          >
+            {isLoading ? 'Deleting…' : <FontAwesomeIcon icon={faTimesCircle} />}
+          </Button>
         </OverlayTrigger>
       </td>
     </tr>

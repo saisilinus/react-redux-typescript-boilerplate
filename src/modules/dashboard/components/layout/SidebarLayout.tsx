@@ -11,7 +11,7 @@ const SidebarLayout = () => {
   return (
     <Container fluid className="px-0">
       <NotifyContainer />
-      <Row className="flex-xl-nowrap" style={{ height: '100vh' }}>
+      <Row className="flex-xl-nowrap" style={{ minHeight: '100vh' }}>
         <Col xs={12} md={3} lg={2} className="px-0">
           <DrawerNav />
         </Col>
