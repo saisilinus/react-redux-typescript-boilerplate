@@ -16,9 +16,9 @@ const CollapsibleNavItem = ({ eventKey, title, icon, pathname, children = null }
   const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : '';
 
   return (
-    <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
+    <Accordion as={Nav.Item} defaultActiveKey={defaultKey} className="my-2">
       <Accordion.Item eventKey={eventKey}>
-        <Accordion.Button as={Nav.Link} className="d-flex justify-content-between align-items-center bg-dark p-3">
+        <Accordion.Button as={Nav.Link} className="bg-dark">
           <span>
             <span className="sidebar-icon">
               <FontAwesomeIcon icon={icon} />{' '}
@@ -26,7 +26,7 @@ const CollapsibleNavItem = ({ eventKey, title, icon, pathname, children = null }
             <span className="sidebar-text">{title}</span>
           </span>
         </Accordion.Button>
-        <Accordion.Body className="multi-level bg-dark">
+        <Accordion.Body className="bg-dark">
           <Nav className="flex-column">{children}</Nav>
         </Accordion.Body>
       </Accordion.Item>

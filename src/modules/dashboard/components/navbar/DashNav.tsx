@@ -10,13 +10,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Container, Dropdown, Form, InputGroup, Nav, Navbar } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../../../../app/hooks';
 
 import { useLogoutMutation } from '../../../auth/auth.api';
 import Loader from '../../../common/loader/Loader';
 import routes from '../../../routing/routes';
 import { getLoggedInUser } from '../../../users/users.api';
+import api from '../../../../app/api';
 
 const DashNav = () => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const [logout, { isLoading }] = useLogoutMutation();
   const navigate = useNavigate();
@@ -28,13 +31,14 @@ const DashNav = () => {
       await logout({ refreshToken })
         .unwrap()
         .then(() => {
+          navigate(routes.Login.absolutePath, { replace: true, state: { from: location } });
+          dispatch(api.util.resetApiState());
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('userId');
           sessionStorage.removeItem('accessToken');
           sessionStorage.removeItem('refreshToken');
           sessionStorage.removeItem('userId');
-          navigate(routes.Login.absolutePath, { replace: true, state: { from: location } });
         });
     }
   }
@@ -42,7 +46,7 @@ const DashNav = () => {
   return (
     <>
       <Loader show={isLoading} />
-      <Navbar variant="dark" expanded className="ps-0 pe-2 pb-0">
+      <Navbar variant="dark" expanded className="ps-0 pe-2 py-1">
         <Container fluid className="px-0">
           <div className="d-flex justify-content-between w-100">
             <div className="d-flex align-items-center">

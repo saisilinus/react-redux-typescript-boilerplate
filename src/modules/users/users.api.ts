@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 import api from '../../app/api';
 import { IQueryResults } from '../common/definitions';
 import {
@@ -7,6 +8,7 @@ import {
   IGetSingleUserRequest,
   IGetUsersRequestParams,
   IUpdateUserRequest,
+  IUser,
   IUserWithoutPassword,
 } from './users.types';
 
@@ -76,6 +78,13 @@ export const getLoggedInUser = (): IUserWithoutPassword | null => {
     }
   }
 
+  return user;
+};
+
+export const getUserFromList = (id: IUser['id']): IUserWithoutPassword | undefined => {
+  const selectUsers = userApi.endpoints.getUsers.select({});
+  const selectUserById = createSelector(selectUsers, (response) => response.data?.results.find((user) => user.id === id));
+  const user = useSelector(selectUserById);
   return user;
 };
 

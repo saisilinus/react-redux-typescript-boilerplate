@@ -9,17 +9,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup, Card, Dropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useForgotPasswordMutation, useSendVerificationEmailMutation } from '../auth/auth.api';
 import { useDeleteUserMutation } from './users.api';
 import { IUserWithoutPassword } from './users.types';
+import routes from '../routing/routes';
 
 type Props = {
   user: IUserWithoutPassword;
 };
 
 const SingleUserRow = ({ user }: Props) => {
+  const navigate = useNavigate();
   const [deleteUser, { isLoading }] = useDeleteUserMutation();
   const [sendForgotPassword, { isLoading: resettingPassword }] = useForgotPasswordMutation();
   const [sendVerificationEmail, { isLoading: sending }] = useSendVerificationEmailMutation();
@@ -99,7 +102,7 @@ const SingleUserRow = ({ user }: Props) => {
                 </span>
               )}
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item onClick={() => navigate(`${routes.UserList.absolutePath}/${user.id}`)}>
               <FontAwesomeIcon icon={faEye} className="me-2" /> View Details
             </Dropdown.Item>
           </Dropdown.Menu>

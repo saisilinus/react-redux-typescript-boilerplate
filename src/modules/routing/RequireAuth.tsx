@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import Loader from '../common/loader/Loader';
@@ -18,10 +19,10 @@ const RequireAuth = ({ element, restrictedTo }: Props) => {
     if (isLoading) return <Loader />;
 
     if (!user || !restrictedTo.includes(user.role)) {
-      return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace />;
+      return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace={true} />;
     }
   } else if (!id) {
-    return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace />;
+    return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace={true} />;
   }
 
   return element;

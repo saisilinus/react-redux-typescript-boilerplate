@@ -19,8 +19,8 @@ type Props = {
 };
 
 const NavItem = ({ title, pathname, link, target, icon, image, badgeText, badgeBg, badgeColor = 'white' }: Props) => {
-  const classNames = badgeText ? 'd-flex justify-content-between align-items-center' : '';
-  const navItemClassName = link === pathname ? 'nav-item my-2 py-1 active rounded' : 'nav-item my-2 py-1 rounded';
+  const classNames = badgeText ? 'd-flex justify-content-between align-items-center text-white' : 'text-white';
+  const navItemClassName = link === pathname ? 'nav-item my-2 py-0 active rounded' : 'nav-item my-2 py-1 rounded';
 
   return (
     <Nav.Item className={navItemClassName}>

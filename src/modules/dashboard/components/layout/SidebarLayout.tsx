@@ -4,16 +4,18 @@ import { Outlet } from 'react-router-dom';
 import NotifyContainer from '../../../common/toast/Notify';
 import Footer from '../footer/Footer';
 import DashNav from '../navbar/DashNav';
+import Sidebar from '../sidebar/Sidebar';
 
-import DrawerNav from '../sidebar/DrawerNav';
+// import DrawerNav from '../sidebar/DrawerNav';
 
 const SidebarLayout = () => {
   return (
     <Container fluid className="px-0">
       <NotifyContainer />
-      <Row className="flex-xl-nowrap" style={{ minHeight: '100vh' }}>
-        <Col xs={12} md={3} lg={2} className="px-0">
-          <DrawerNav />
+      <Row className="flex-xl-nowrap px-0 mx-0 sidebar layout">
+        <Col xs={12} md={3} lg={2} className="px-0 mb-2 mb-md-0">
+          {/* <DrawerNav /> */}
+          <Sidebar />
         </Col>
         <Col xs={12} md={9} lg={10} className="d-flex flex-column justify-content-between">
           <div>

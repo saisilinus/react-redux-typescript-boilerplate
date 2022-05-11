@@ -7,6 +7,7 @@ import SingleUserRow from './SingleUserRow';
 import { useGetUsersQuery } from './users.api';
 import Paginate from '../common/pagination/Paginate';
 import routes from '../routing/routes';
+import Loader from '../common/loader/Loader';
 
 const LimitItem = ({ limit, currentLimit, onClick }: { limit: number; currentLimit: number; onClick: () => void }) => (
   <Dropdown.Item className="fw-bold" onClick={onClick}>
@@ -25,7 +26,7 @@ const UserList = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentLimit, setCurrentLimit] = useState<number>(10);
-  const { data } = useGetUsersQuery({ page: currentPage, limit: currentLimit });
+  const { data, isLoading, isFetching } = useGetUsersQuery({ page: currentPage, limit: currentLimit });
 
   const onPageClicked = (page: number) => {
     setCurrentPage(page);
@@ -37,6 +38,7 @@ const UserList = () => {
 
   return (
     <>
+      <Loader show={isLoading || isFetching} />
       <div className="d-lg-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div className="mb-2 mb-lg-0">
           <h4>Users List</h4>
@@ -77,6 +79,7 @@ const UserList = () => {
                 <LimitItem limit={20} currentLimit={currentLimit} onClick={() => setCurrentLimit(20)} />
                 <LimitItem limit={30} currentLimit={currentLimit} onClick={() => setCurrentLimit(30)} />
                 <Dropdown.Divider />
+                <Dropdown.Item className="fw-bold text-dark">Custom</Dropdown.Item>
                 <InputGroup className="mb-3">
                   <Form.Control
                     type="number"
