@@ -1,7 +1,12 @@
 import React from 'react';
+import Animate from '../common/animate/Animate';
 
 const DashboardHome = () => {
-  return <div>DashboardHome</div>;
+  return (
+    <Animate>
+      <div>DashboardHome</div>
+    </Animate>
+  );
 };
 
 export default DashboardHome;

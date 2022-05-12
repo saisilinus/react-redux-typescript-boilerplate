@@ -8,6 +8,7 @@ import { useGetUsersQuery } from './users.api';
 import Paginate from '../common/pagination/Paginate';
 import routes from '../routing/routes';
 import Loader from '../common/loader/Loader';
+import Animate from '../common/animate/Animate';
 
 const LimitItem = ({ limit, currentLimit, onClick }: { limit: number; currentLimit: number; onClick: () => void }) => (
   <Dropdown.Item className="fw-bold" onClick={onClick}>
@@ -92,25 +93,27 @@ const UserList = () => {
           </Col>
         </Row>
       </div>
-      <Paginate currentPage={currentPage} totalPages={data.totalPages} onPageClick={onPageClicked}>
-        <div className="bg-white p-3 mt-4 rounded">
-          <Table hover className="user-table align-items-center">
-            <thead>
-              <tr>
-                <th className="border-bottom">Name</th>
-                <th className="border-bottom">Role</th>
-                <th className="border-bottom">Verified</th>
-                <th className="border-bottom">Action</th>
-              </tr>
-            </thead>
-            <tbody className="p-3">
-              {data.results.map((user) => (
-                <SingleUserRow user={user} key={user.id} />
-              ))}
-            </tbody>
-          </Table>
-        </div>
-      </Paginate>
+      <Animate>
+        <Paginate currentPage={currentPage} totalPages={data.totalPages} onPageClick={onPageClicked}>
+          <div className="bg-white p-3 mt-4 rounded">
+            <Table hover className="user-table align-items-center">
+              <thead>
+                <tr>
+                  <th className="border-bottom">Name</th>
+                  <th className="border-bottom">Role</th>
+                  <th className="border-bottom">Verified</th>
+                  <th className="border-bottom">Action</th>
+                </tr>
+              </thead>
+              <tbody className="p-3">
+                {data.results.map((user) => (
+                  <SingleUserRow user={user} key={user.id} />
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </Paginate>
+      </Animate>
     </>
   );
 };

@@ -9,6 +9,7 @@ import formatNames from '../common/utils/formatName';
 import sanitize from '../common/utils/sanitize';
 import splitName from '../common/utils/splitName';
 import checkOneOf from '../common/utils/checkOneOf';
+import Animate from '../common/animate/Animate';
 
 const Profile = () => {
   const user = getLoggedInUser();
@@ -27,7 +28,7 @@ const Profile = () => {
     if (!user) toast.error('User is not logged in');
     else if (checkOneOf([firstName, lastName, email, password])) toast.error('Please fill at least one field');
     else {
-      await updateUser({ id: user.id, body })
+      await updateUser({ id: user?.id, body })
         .unwrap()
         .then((updatedUser) => {
           toast.success(`${updatedUser.name} has been successfully updated!`);
@@ -38,79 +39,81 @@ const Profile = () => {
   return (
     <>
       <Loader show={isLoading} />
-      <Card border="light" className="bg-white shadow-sm mb-4">
-        <Card.Body>
-          <h5 className="mb-4">User Details</h5>
-          <Form onSubmit={handleSubmit}>
-            <Row>
-              <Col md={6} className="mb-3">
-                <Form.Group id="firstName">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    required={false}
-                    type="text"
-                    defaultValue={splitName(user.name)[0]}
-                    placeholder="Enter your first name"
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6} className="mb-3">
-                <Form.Group id="lastName">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    required={false}
-                    type="text"
-                    defaultValue={splitName(user.name)[1]}
-                    placeholder="Also your last name"
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={6} className="mb-3">
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <FontAwesomeIcon icon={faAt} />
-                    </InputGroup.Text>
+      <Animate>
+        <Card border="light" className="bg-white shadow-sm mb-4">
+          <Card.Body>
+            <h5 className="mb-4">User Details</h5>
+            <Form onSubmit={handleSubmit}>
+              <Row>
+                <Col md={6} className="mb-3">
+                  <Form.Group id="firstName">
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control
                       required={false}
-                      type="email"
-                      defaultValue={user.email ?? ''}
-                      placeholder="name@company.com"
-                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      defaultValue={splitName(user.name)[0]}
+                      placeholder="Enter your first name"
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-              <Col md={6} className="mb-3">
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <FontAwesomeIcon icon={faKey} />
-                    </InputGroup.Text>
+                  </Form.Group>
+                </Col>
+                <Col md={6} className="mb-3">
+                  <Form.Group id="lastName">
+                    <Form.Label>Last Name</Form.Label>
                     <Form.Control
                       required={false}
-                      type="password"
-                      placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      type="text"
+                      defaultValue={splitName(user.name)[1]}
+                      placeholder="Also your last name"
+                      onChange={(e) => setLastName(e.target.value)}
                     />
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Button variant="primary" type="submit" className="w-100">
-                Update
-              </Button>
-            </Row>
-          </Form>
-        </Card.Body>
-      </Card>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6} className="mb-3">
+                  <Form.Group id="email">
+                    <Form.Label>Email</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Text>
+                        <FontAwesomeIcon icon={faAt} />
+                      </InputGroup.Text>
+                      <Form.Control
+                        required={false}
+                        type="email"
+                        defaultValue={user.email ?? ''}
+                        placeholder="name@company.com"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
+                <Col md={6} className="mb-3">
+                  <Form.Group id="password">
+                    <Form.Label>Password</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Text>
+                        <FontAwesomeIcon icon={faKey} />
+                      </InputGroup.Text>
+                      <Form.Control
+                        required={false}
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Button variant="primary" type="submit" className="w-100">
+                  Update
+                </Button>
+              </Row>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Animate>
     </>
   );
 };

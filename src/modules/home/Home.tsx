@@ -1,7 +1,12 @@
 import React from 'react';
+import Animate from '../common/animate/Animate';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <Animate>
+      <div>Home</div>
+    </Animate>
+  );
 };
 
 export default Home;
