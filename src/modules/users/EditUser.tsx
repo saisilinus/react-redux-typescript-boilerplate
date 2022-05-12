@@ -21,6 +21,7 @@ const EditUser = () => {
   const [password, setPassword] = useState<string>('');
 
   if (!id) return <div>No User Found</div>;
+
   const { data } = useGetSingleUserQuery({ id });
 
   if (!data) return <div>No User Found</div>;

@@ -11,9 +11,6 @@ import {
   IUser,
   IUserWithoutPassword,
 } from './users.types';
-import { useAppDispatch } from '../../app/hooks';
-import { userIdAdded } from './users.slice';
-import { RootState } from '../../app/store';
 
 const apiWithUserTags = api.enhanceEndpoints({ addTagTypes: ['User'] });
 
@@ -70,21 +67,18 @@ const userApi = apiWithUserTags.injectEndpoints({
 });
 
 // Selectors
+// TODO: fix selectUsers > always returns undefined
 export const selectUsers = userApi.endpoints.getUsers.select({});
 export const selectUserById = (id: IUser['id']) => userApi.endpoints.getSingleUser.select({ id });
-export const selectUserFromList = createSelector(
-  selectUsers,
-  (state: RootState) => state.users,
-  (response, userState) => response.data?.results.find((user) => user.id === userState.id)
-);
+export const selectUserFromList = (id: IUser['id']) =>
+  createSelector(selectUsers, (response) => response.data?.results.find((user) => user.id === id));
 
 export const getLoggedInUser = (): IUserWithoutPassword | null => {
   let user: IUserWithoutPassword | null = null;
   const id = sessionStorage.getItem('userId') || localStorage.getItem('userId');
 
   if (id) {
-    const selectUser = userApi.endpoints.getSingleUser.select({ id });
-    const { data } = useSelector(selectUser);
+    const { data } = useSelector(selectUserById(id));
     if (data) {
       user = data;
     }
@@ -93,12 +87,8 @@ export const getLoggedInUser = (): IUserWithoutPassword | null => {
   return user;
 };
 
-export const getUserFromList = (id: IUser['id']): IUserWithoutPassword | undefined => {
-  const dispatch = useAppDispatch();
-  dispatch(userIdAdded(id));
+export const getUserById = (id: IUser['id']): IUserWithoutPassword | undefined => {
   const { data } = useSelector(selectUserById(id));
-  // eslint-disable-next-line no-console
-  console.log(data);
   return data;
 };
 

@@ -7,12 +7,10 @@ import api from './api';
 import { rtkQueryErrorLogger } from '../modules/common/toast/Notify';
 
 // reducers
-import userReducer from '../modules/users/users.slice';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    users: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware, rtkQueryErrorLogger),
 });
