@@ -5,10 +5,7 @@ import { Card, Col, Form, InputGroup, Row, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import Loader from '../common/loader/Loader';
 import { useCreateUserMutation } from './users.api';
-
-// Capitalizes each name
-export const formatNames = (names: string[]): string =>
-  names.map((i) => i.charAt(0).toUpperCase() + i.substring(1)).join(' ');
+import formatNames from '../common/utils/formatName';
 
 const NewUser = () => {
   const [createUser, { isLoading }] = useCreateUserMutation();

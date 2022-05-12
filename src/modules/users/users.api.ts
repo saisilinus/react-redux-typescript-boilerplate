@@ -11,6 +11,9 @@ import {
   IUser,
   IUserWithoutPassword,
 } from './users.types';
+import { useAppDispatch } from '../../app/hooks';
+import { userIdAdded } from './users.slice';
+import { RootState } from '../../app/store';
 
 const apiWithUserTags = api.enhanceEndpoints({ addTagTypes: ['User'] });
 
@@ -66,6 +69,15 @@ const userApi = apiWithUserTags.injectEndpoints({
   }),
 });
 
+// Selectors
+export const selectUsers = userApi.endpoints.getUsers.select({});
+export const selectUserById = (id: IUser['id']) => userApi.endpoints.getSingleUser.select({ id });
+export const selectUserFromList = createSelector(
+  selectUsers,
+  (state: RootState) => state.users,
+  (response, userState) => response.data?.results.find((user) => user.id === userState.id)
+);
+
 export const getLoggedInUser = (): IUserWithoutPassword | null => {
   let user: IUserWithoutPassword | null = null;
   const id = sessionStorage.getItem('userId') || localStorage.getItem('userId');
@@ -82,10 +94,12 @@ export const getLoggedInUser = (): IUserWithoutPassword | null => {
 };
 
 export const getUserFromList = (id: IUser['id']): IUserWithoutPassword | undefined => {
-  const selectUsers = userApi.endpoints.getUsers.select({});
-  const selectUserById = createSelector(selectUsers, (response) => response.data?.results.find((user) => user.id === id));
-  const user = useSelector(selectUserById);
-  return user;
+  const dispatch = useAppDispatch();
+  dispatch(userIdAdded(id));
+  const { data } = useSelector(selectUserById(id));
+  // eslint-disable-next-line no-console
+  console.log(data);
+  return data;
 };
 
 export const {

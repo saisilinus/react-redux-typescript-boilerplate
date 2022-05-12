@@ -5,8 +5,11 @@ import { Card, Col, Form, InputGroup, Row, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Loader from '../common/loader/Loader';
-import { getUserFromList, useUpdateUserMutation } from './users.api';
-import { formatNames } from './NewUser';
+import { useGetSingleUserQuery, useUpdateUserMutation } from './users.api';
+import formatNames from '../common/utils/formatName';
+import sanitize from '../common/utils/sanitize';
+import splitName from '../common/utils/splitName';
+import checkOneOf from '../common/utils/checkOneOf';
 
 const EditUser = () => {
   const { id } = useParams();
@@ -17,23 +20,24 @@ const EditUser = () => {
   const [password, setPassword] = useState<string>('');
 
   if (!id) return <div>No User Found</div>;
+  const { data } = useGetSingleUserQuery({ id });
 
-  const user = getUserFromList(id);
+  if (!data) return <div>No User Found</div>;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const body = sanitize({ name: formatNames([firstName, lastName]), email, password });
 
     if (!id) toast.error('User ID is not available');
+    else if (checkOneOf([firstName, lastName, email, password])) toast.error('Please fill at least one field');
     else {
-      await updateUser({ id, body: { name: formatNames([firstName, lastName]), email, password } })
+      await updateUser({ id, body })
         .unwrap()
         .then((updatedUser) => {
           toast.success(`${updatedUser.name} has been successfully updated!`);
         });
     }
   }
-
-  const splitName = (name: string | undefined): string[] => (name ? name.split(' ') : ['', '']);
 
   return (
     <>
@@ -47,9 +51,9 @@ const EditUser = () => {
                 <Form.Group id="firstName">
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
-                    required
+                    required={false}
                     type="text"
-                    defaultValue={splitName(user?.name)[0]}
+                    defaultValue={splitName(data.name)[0]}
                     placeholder="Enter your first name"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
@@ -59,9 +63,9 @@ const EditUser = () => {
                 <Form.Group id="lastName">
                   <Form.Label>Last Name</Form.Label>
                   <Form.Control
-                    required
+                    required={false}
                     type="text"
-                    defaultValue={splitName(user?.name)[-1]}
+                    defaultValue={splitName(data.name)[1]}
                     placeholder="Also your last name"
                     onChange={(e) => setLastName(e.target.value)}
                   />
@@ -77,9 +81,9 @@ const EditUser = () => {
                       <FontAwesomeIcon icon={faAt} />
                     </InputGroup.Text>
                     <Form.Control
-                      required
+                      required={false}
                       type="email"
-                      defaultValue={user?.email ?? ''}
+                      defaultValue={data.email ?? ''}
                       placeholder="name@company.com"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -94,7 +98,7 @@ const EditUser = () => {
                       <FontAwesomeIcon icon={faKey} />
                     </InputGroup.Text>
                     <Form.Control
-                      required
+                      required={false}
                       type="password"
                       placeholder="Password"
                       onChange={(e) => setPassword(e.target.value)}
