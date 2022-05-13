@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup, Col, Dropdown, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import { faCheck, faPlus, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import RangeSlider from 'react-bootstrap-range-slider';
 import SingleUserRow from './SingleUserRow';
 import { useGetUsersQuery } from './users.api';
 import Paginate from '../common/pagination/Paginate';
@@ -82,9 +83,10 @@ const UserList = () => {
                 <Dropdown.Divider />
                 <Dropdown.Item className="fw-bold text-dark">Custom</Dropdown.Item>
                 <InputGroup className="mb-3">
-                  <Form.Control
-                    type="number"
-                    aria-label="Number of users"
+                  <RangeSlider
+                    min={1}
+                    max={data.totalResults}
+                    value={currentLimit}
                     onChange={(e) => setCurrentLimit(parseInt(e.target.value, 10))}
                   />
                 </InputGroup>

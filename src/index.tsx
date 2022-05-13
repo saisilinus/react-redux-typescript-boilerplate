@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 // styles
 import './styles/custom.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
 ReactDOM.render(
   <React.StrictMode>
