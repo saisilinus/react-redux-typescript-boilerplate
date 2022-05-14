@@ -48,6 +48,7 @@ const ForgotPassword = () => {
                           <FontAwesomeIcon icon={faEnvelope} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="forgot-password-email"
                           name="email"
                           autoFocus
                           required
@@ -57,7 +58,7 @@ const ForgotPassword = () => {
                         />
                       </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="w-100">
+                    <Button variant="primary" type="submit" className="w-100" data-testid="forgot-password-submit">
                       Send
                     </Button>
                   </Form>

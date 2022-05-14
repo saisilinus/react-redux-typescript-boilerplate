@@ -48,7 +48,7 @@ const VerifyEmail = () => {
                     <h3 className="mb-0">Verify Your Email</h3>
                   </div>
                   <Form className="mt-4" onSubmit={handleSubmit}>
-                    <Button variant="primary" type="submit" className="w-100">
+                    <Button variant="primary" type="submit" className="w-100" data-testid="verify-email-submit">
                       Verify
                     </Button>
                   </Form>

@@ -27,11 +27,6 @@ const Login = () => {
 
   const previousLocationState = location.state as LocationState;
 
-  const clearFields = () => {
-    setEmail('');
-    setPassword('');
-  };
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const rememberMe = localStorage.getItem('rememberMe');
@@ -48,7 +43,6 @@ const Login = () => {
           sessionStorage.setItem('refreshToken', payload.tokens.refresh.token);
           sessionStorage.setItem('userId', payload.user.id);
         }
-        clearFields();
         navigate(previousLocationState?.from.pathname || '/', { replace: true });
       });
   }
@@ -70,7 +64,7 @@ const Login = () => {
                   <div className="text-center text-md-center mb-4 mt-md-0">
                     <h3 className="mb-0">Sign in to our platform</h3>
                   </div>
-                  <Form className="mt-4" onSubmit={handleSubmit}>
+                  <Form className="mt-4" data-testid="login-form" onSubmit={handleSubmit}>
                     <Form.Group id="email" className="mb-4">
                       <Form.Label>Your Email</Form.Label>
                       <InputGroup>
@@ -78,6 +72,7 @@ const Login = () => {
                           <FontAwesomeIcon icon={faEnvelope} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="login-email"
                           name="email"
                           autoFocus
                           required
@@ -95,6 +90,7 @@ const Login = () => {
                             <FontAwesomeIcon icon={faUnlockAlt} />
                           </InputGroup.Text>
                           <Form.Control
+                            data-testid="login-password"
                             name="password"
                             required
                             type="password"
@@ -125,7 +121,7 @@ const Login = () => {
                         </Card.Link>
                       </div>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="w-100">
+                    <Button variant="primary" type="submit" className="w-100" data-testid="login-submit">
                       Sign in
                     </Button>
                   </Form>

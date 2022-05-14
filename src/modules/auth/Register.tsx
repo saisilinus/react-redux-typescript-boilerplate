@@ -50,7 +50,7 @@ const Register = () => {
               <Col xs={12} className="d-flex align-items-center justify-content-center">
                 <div className="bg-white border rounded border-light p-4 p-lg-5 w-lg-50 w-md-100">
                   <div className="text-center text-md-center mb-4 mt-md-0">
-                    <h3 className="mb-0">Register</h3>
+                    <h3 className="mb-0">Create an Account</h3>
                   </div>
                   <Form className="mt-4" onSubmit={handleSubmit}>
                     <Form.Group id="name" className="mb-4">
@@ -60,6 +60,7 @@ const Register = () => {
                           <FontAwesomeIcon icon={faUser} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="register-name"
                           name="name"
                           autoFocus
                           required
@@ -76,6 +77,7 @@ const Register = () => {
                           <FontAwesomeIcon icon={faEnvelope} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="register-email"
                           name="email"
                           autoFocus
                           required
@@ -92,6 +94,7 @@ const Register = () => {
                           <FontAwesomeIcon icon={faUnlockAlt} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="register-password"
                           name="password"
                           required
                           type="password"
@@ -100,7 +103,7 @@ const Register = () => {
                         />
                       </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="w-100">
+                    <Button variant="primary" type="submit" className="w-100" data-testid="register-submit">
                       Register
                     </Button>
                   </Form>

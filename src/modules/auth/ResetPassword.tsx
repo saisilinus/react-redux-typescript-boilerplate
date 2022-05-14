@@ -56,6 +56,7 @@ const ResetPassword = () => {
                           <FontAwesomeIcon icon={faUnlockAlt} />
                         </InputGroup.Text>
                         <Form.Control
+                          data-testid="reset-password-password"
                           name="password"
                           required
                           type="password"
@@ -64,7 +65,7 @@ const ResetPassword = () => {
                         />
                       </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="w-100">
+                    <Button variant="primary" type="submit" className="w-100" data-testid="reset-password-submit">
                       Reset
                     </Button>
                   </Form>
