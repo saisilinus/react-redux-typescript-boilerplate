@@ -3,6 +3,7 @@ import { setupServer } from 'msw/node';
 import { users, userWithTokens, queryResult } from './data';
 
 const baseUrl = 'http://localhost/';
+const dashUrl = 'http://localhost/dashboard/';
 
 export const handlers = [
   rest.post(`${baseUrl}auth/login`, (req, res, ctx) => {
@@ -32,13 +33,25 @@ export const handlers = [
   rest.post(`${baseUrl}users`, (req, res, ctx) => {
     return res(ctx.json(users[7]), ctx.delay(150));
   }),
+  rest.post(`${dashUrl}users`, (req, res, ctx) => {
+    return res(ctx.json(users[7]), ctx.delay(150));
+  }),
   rest.get(`${baseUrl}users`, (req, res, ctx) => {
+    return res(ctx.json(queryResult), ctx.delay(150));
+  }),
+  rest.get(`${dashUrl}users`, (req, res, ctx) => {
     return res(ctx.json(queryResult), ctx.delay(150));
   }),
   rest.get(`${baseUrl}users/:id`, (req, res, ctx) => {
     return res(ctx.json(users[8]), ctx.delay(150));
   }),
+  rest.get(`${dashUrl}users/:id`, (req, res, ctx) => {
+    return res(ctx.json(users[8]), ctx.delay(150));
+  }),
   rest.patch(`${baseUrl}users/:id`, (req, res, ctx) => {
+    return res(ctx.json(users[9]), ctx.delay(150));
+  }),
+  rest.patch(`${dashUrl}users/:id`, (req, res, ctx) => {
     return res(ctx.json(users[9]), ctx.delay(150));
   }),
   rest.delete(`${baseUrl}users/:id`, (req, res, ctx) => {

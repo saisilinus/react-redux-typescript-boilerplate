@@ -29,7 +29,7 @@ function render(
     ...renderOptions
   }: Props = {}
 ) {
-  window.history.pushState({}, 'Home page', route);
+  window.history.pushState({}, 'Test page', route);
   const Wrapper = ({ children }: { children?: React.ReactNode }) => (
     <BrowserRouter>
       <Provider store={store}>{children}</Provider>
@@ -42,7 +42,6 @@ function render(
 }
 
 // re-export everything
-export * as lib from '@testing-library/react';
 export * from '@testing-library/react';
 // override render method
 export { render };

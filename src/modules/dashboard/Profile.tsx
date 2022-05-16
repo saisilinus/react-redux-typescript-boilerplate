@@ -49,6 +49,7 @@ const Profile = () => {
                   <Form.Group id="firstName">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
+                      data-testid="profile-firstName"
                       required={false}
                       type="text"
                       defaultValue={splitName(user.name)[0]}
@@ -61,6 +62,7 @@ const Profile = () => {
                   <Form.Group id="lastName">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control
+                      data-testid="profile-lastName"
                       required={false}
                       type="text"
                       defaultValue={splitName(user.name)[1]}
@@ -106,7 +108,7 @@ const Profile = () => {
                 </Col>
               </Row>
               <Row>
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100" data-testid="profile-submit">
                   Update
                 </Button>
               </Row>

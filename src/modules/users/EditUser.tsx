@@ -54,6 +54,7 @@ const EditUser = () => {
                   <Form.Group id="firstName">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
+                      data-testid="editUser-firstName"
                       required={false}
                       type="text"
                       defaultValue={splitName(data.name)[0]}
@@ -66,6 +67,7 @@ const EditUser = () => {
                   <Form.Group id="lastName">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control
+                      data-testid="editUser-lastName"
                       required={false}
                       type="text"
                       defaultValue={splitName(data.name)[1]}
@@ -111,7 +113,7 @@ const EditUser = () => {
                 </Col>
               </Row>
               <Row>
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100" data-testid="editUser-submit">
                   Update
                 </Button>
               </Row>

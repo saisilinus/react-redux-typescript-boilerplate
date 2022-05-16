@@ -102,6 +102,7 @@ const Login = () => {
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <Form.Check type="checkbox">
                           <FormCheck.Input
+                            data-testid="login-rememberMe"
                             id="defaultCheck5"
                             className="me-2"
                             onChange={(e) => {

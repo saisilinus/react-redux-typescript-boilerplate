@@ -39,6 +39,7 @@ const NewUser = () => {
                   <Form.Group id="firstName">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
+                      data-testid="newUser-firstName"
                       required
                       type="text"
                       placeholder="Enter your first name"
@@ -50,6 +51,7 @@ const NewUser = () => {
                   <Form.Group id="lastName">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control
+                      data-testid="newUser-lastName"
                       required
                       type="text"
                       placeholder="Also your last name"
@@ -62,9 +64,11 @@ const NewUser = () => {
                 <Col md={6} className="mb-3">
                   <Form.Group id="role">
                     <Form.Label>Role</Form.Label>
-                    <Form.Select defaultValue="user" onChange={(e) => setRole(e.target.value)}>
+                    <Form.Select data-testid="newUser-role" defaultValue="user" onChange={(e) => setRole(e.target.value)}>
                       <option>Choose a role</option>
-                      <option value="user">User</option>
+                      <option value="user" data-testid="newUser-role-user">
+                        User
+                      </option>
                       <option value="admin">Admin</option>
                     </Form.Select>
                   </Form.Group>
@@ -77,6 +81,7 @@ const NewUser = () => {
                         <FontAwesomeIcon icon={faAt} />
                       </InputGroup.Text>
                       <Form.Control
+                        data-testid="newUser-email"
                         required
                         type="email"
                         placeholder="name@company.com"
@@ -94,6 +99,7 @@ const NewUser = () => {
                       <FontAwesomeIcon icon={faKey} />
                     </InputGroup.Text>
                     <Form.Control
+                      data-testid="newUser-password"
                       required
                       type="password"
                       placeholder="Password"
@@ -103,7 +109,7 @@ const NewUser = () => {
                 </Form.Group>
               </Row>
               <Row>
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100" data-testid="newUser-submit">
                   Create
                 </Button>
               </Row>
