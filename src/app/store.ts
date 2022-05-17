@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query/react';
 import api from './api';
 
 // middleware
-import { rtkQueryErrorLogger } from '../modules/common/toast/Notify';
+import { rtkQueryErrorLogger } from '../modules/common/components/Notify';
 
 // reducers
 

@@ -13,8 +13,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../../../app/hooks';
 
 import { useLogoutMutation } from '../../../auth/auth.api';
-import Loader from '../../../common/loader/Loader';
-import routes from '../../../routing/routes';
+import Loader from '../../../common/components/Loader';
+import routes from '../../../common/routing/routes';
 import { getLoggedInUser } from '../../../users/users.api';
 import api from '../../../../app/api';
 

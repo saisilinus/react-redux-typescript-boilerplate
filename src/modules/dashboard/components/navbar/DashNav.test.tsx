@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../testing/utils';
+import { render, screen, waitFor } from '../../../../../__mocks__/utils';
 import DashNav from './DashNav';
-import server from '../../../testing/server';
-import { Routing } from '../../../routing';
+import server from '../../../../../__mocks__/server';
+import { Routing } from '../../../common/routing';
 
 beforeAll(() => server.listen());
 

@@ -3,10 +3,10 @@ import { Container, Card, Row, Col, Form, InputGroup, FormCheck, Button } from '
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faEnvelope, faUnlockAlt } from '@fortawesome/free-solid-svg-icons';
-import routes from '../routing/routes';
+import routes from '../common/routing/routes';
 import { useLoginMutation } from './auth.api';
-import Loader from '../common/loader/Loader';
-import Animate from '../common/animate/Animate';
+import Loader from '../common/components/Loader';
+import Animate from '../common/components/Animate';
 
 interface IdealLocationState {
   from: {

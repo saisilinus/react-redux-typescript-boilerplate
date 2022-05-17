@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
-import NotifyContainer from '../../../common/toast/Notify';
+import NotifyContainer from '../../../common/components/Notify';
 import Footer from '../footer/Footer';
 import DashNav from '../navbar/DashNav';
 import Sidebar from '../sidebar/Sidebar';

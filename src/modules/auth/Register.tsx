@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
-import Loader from '../common/loader/Loader';
+import Loader from '../common/components/Loader';
 import { useRegisterMutation } from './auth.api';
-import routes from '../routing/routes';
-import Animate from '../common/animate/Animate';
+import routes from '../common/routing/routes';
+import Animate from '../common/components/Animate';
 
 const Register = () => {
   const [name, setName] = useState('');

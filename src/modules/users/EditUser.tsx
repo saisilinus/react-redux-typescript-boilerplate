@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import { Card, Col, Form, InputGroup, Row, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-import Loader from '../common/loader/Loader';
+import Loader from '../common/components/Loader';
 import { useGetSingleUserQuery, useUpdateUserMutation } from './users.api';
 import formatNames from '../common/utils/formatName';
 import sanitize from '../common/utils/sanitize';
 import splitName from '../common/utils/splitName';
 import checkOneOf from '../common/utils/checkOneOf';
-import Animate from '../common/animate/Animate';
+import Animate from '../common/components/Animate';
 
 const EditUser = () => {
   const { id } = useParams();

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { Nav, Collapse } from 'react-bootstrap';
-import routes from '../../../routing/routes';
+import routes from '../../../common/routing/routes';
 import NavItem from './NavItem';
 import CollapsibleNavItem from './CollapsibleNavItem';
 import Toggle from './Toggle';

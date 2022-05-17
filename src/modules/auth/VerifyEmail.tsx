@@ -4,10 +4,10 @@ import React from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import Loader from '../common/loader/Loader';
+import Loader from '../common/components/Loader';
 import { useVerifyEmailMutation } from './auth.api';
-import routes from '../routing/routes';
-import Animate from '../common/animate/Animate';
+import routes from '../common/routing/routes';
+import Animate from '../common/components/Animate';
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();

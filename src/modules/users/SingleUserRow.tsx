@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { useForgotPasswordMutation, useSendVerificationEmailMutation } from '../auth/auth.api';
 import { useDeleteUserMutation } from './users.api';
 import { IUserWithoutPassword } from './users.types';
-import routes from '../routing/routes';
+import routes from '../common/routing/routes';
 
 type Props = {
   user: IUserWithoutPassword;

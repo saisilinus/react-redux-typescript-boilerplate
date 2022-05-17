@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RangeSlider from 'react-bootstrap-range-slider';
 import SingleUserRow from './SingleUserRow';
 import { useGetUsersQuery } from './users.api';
-import Paginate from '../common/pagination/Paginate';
-import routes from '../routing/routes';
-import Loader from '../common/loader/Loader';
-import Animate from '../common/animate/Animate';
+import Paginate from '../common/components/Paginate';
+import routes from '../common/routing/routes';
+import Loader from '../common/components/Loader';
+import Animate from '../common/components/Animate';
 
 const LimitItem = ({ limit, currentLimit, onClick }: { limit: number; currentLimit: number; onClick: () => void }) => (
   <Dropdown.Item className="fw-bold" onClick={onClick}>
