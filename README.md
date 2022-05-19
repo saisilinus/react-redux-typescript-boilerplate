@@ -85,6 +85,7 @@ cp .env.example .env.local
 
 ## Folder Structure
 
+```
 src
 ├── app
 │   ├── api.ts
@@ -120,6 +121,7 @@ src
 │   ├── _utilities.scss
 │   └── _variables.scss
 └── testUtils
+```
 
 ## Linting
 
