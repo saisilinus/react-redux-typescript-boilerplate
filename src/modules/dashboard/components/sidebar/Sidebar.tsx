@@ -7,7 +7,7 @@ import routes from '../../../common/routing/routes';
 import NavItem from './NavItem';
 import CollapsibleNavItem from './CollapsibleNavItem';
 import Toggle from './Toggle';
-import { restrictions } from '../../../common/routing';
+import restrictions from '../../../common/routing/restrictions';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(!isMobile);
