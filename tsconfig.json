@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"    
   },
-  "include": ["src", "src/testUtils/utils.tsx", "src/testUtils/data.ts", "src/testUtils/server.ts"]
+  "include": ["src"]
 }
