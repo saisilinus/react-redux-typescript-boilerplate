@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 // reducers
 import api from '../src/app/api';
-import { rtkQueryErrorLogger } from '../src/modules/common/components/Notify';
+import { rtkQueryErrorLogger } from '../src/app/middleware';
 
 type Props = {
   route?: string;

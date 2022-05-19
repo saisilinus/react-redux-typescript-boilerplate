@@ -4,6 +4,7 @@ import { render, screen, waitFor } from '../../../../__mocks__/utils';
 import ForgotPassword from '../ForgotPassword';
 import server from '../../../../__mocks__/server';
 import NotifyContainer from '../../common/components/Notify';
+import routes from '../../common/routing/routes';
 
 beforeAll(() => server.listen());
 
@@ -19,9 +20,9 @@ describe('Forgot Password', () => {
   });
 
   test('back to login link works', async () => {
-    const { user } = render(<Routing />, { route: 'forgot-password' });
+    const { user } = render(<Routing />, { route: routes.ForgotPassword.absolutePath });
 
-    await user.click(screen.getByText(/Back to login/i));
+    await user.click(screen.getByRole('link', { name: 'Back to login' }));
 
     expect(screen.getByText(/Sign in to our platform/i)).toBeInTheDocument();
   });
@@ -35,7 +36,7 @@ describe('Forgot Password', () => {
     );
 
     await user.type(screen.getByTestId('forgot-password-email'), 'john@example.com');
-    await user.click(screen.getByTestId('forgot-password-submit'));
+    await user.click(screen.getByRole('button', { name: 'Send' }));
 
     await waitFor(() => expect(screen.getByText(/Please check your email/i)).toBeInTheDocument());
   });

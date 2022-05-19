@@ -27,11 +27,10 @@ describe('Users', () => {
 
     await user.type(screen.getByTestId('newUser-firstName'), 'curtis');
     await user.type(screen.getByTestId('newUser-lastName'), 'jackson');
-    await user.click(screen.getByTestId('newUser-role'));
-    await user.click(screen.getByTestId('newUser-role-user'));
+    await user.click(screen.getByRole('option', { name: 'User' }));
     await user.type(screen.getByTestId('newUser-email'), 'jackson@gmail.com');
     await user.type(screen.getByTestId('newUser-password'), 'jackson123');
-    await user.click(screen.getByTestId('newUser-submit'));
+    await user.click(screen.getByRole('button', { name: 'Create' }));
 
     await waitFor(() => expect(screen.getByText(/has been successfully registered/i)).toBeInTheDocument());
   });

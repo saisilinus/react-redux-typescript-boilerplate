@@ -10,12 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Container, Dropdown, Form, InputGroup, Nav, Navbar } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../../../app/hooks';
 
 import { useLogoutMutation } from '../../../auth/auth.api';
 import Loader from '../../../common/components/Loader';
 import routes from '../../../common/routing/routes';
-import { getLoggedInUser } from '../../../users/users.api';
+import { useCurrentUser } from '../../../users/users.api';
 import api from '../../../../app/api';
 
 const DashNav = () => {
@@ -23,11 +24,13 @@ const DashNav = () => {
   const location = useLocation();
   const [logout, { isLoading }] = useLogoutMutation();
   const navigate = useNavigate();
-  const user = getLoggedInUser();
+  const user = useCurrentUser();
 
   async function handleLogout() {
     const refreshToken = sessionStorage.getItem('refreshToken') || localStorage.getItem('refreshToken');
-    if (refreshToken) {
+    if (!refreshToken) {
+      toast.error('You have to be logged in to log out');
+    } else {
       await logout({ refreshToken })
         .unwrap()
         .then(() => {

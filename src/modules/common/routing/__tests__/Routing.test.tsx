@@ -10,7 +10,7 @@ describe('Navigation', () => {
       screen.getByText(/Just a simple react bootstrap template that uses modern redux with redux toolkit/i)
     ).toBeInTheDocument();
 
-    await user.click(screen.getByText(/Dashboard/i));
+    await user.click(screen.getByRole('link', { name: 'Dashboard' }));
 
     expect(screen.getByText(/Sign in to our platform/i)).toBeInTheDocument();
   });

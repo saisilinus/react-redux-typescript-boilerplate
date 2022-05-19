@@ -78,7 +78,7 @@ const SingleUserRow = ({ user }: Props) => {
       </td>
       <td>
         <Dropdown as={ButtonGroup}>
-          <Dropdown.Toggle as={Button} split variant="link" className="text-dark m-0 p-0">
+          <Dropdown.Toggle as={Button} data-testid="singleUser-toggle" split variant="link" className="text-dark m-0 p-0">
             <span className="icon icon-sm">
               <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
             </span>
@@ -110,6 +110,7 @@ const SingleUserRow = ({ user }: Props) => {
 
         <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={<Tooltip>Delete</Tooltip>}>
           <Button
+            data-testid="singleUser-delete"
             variant="link"
             disabled={isLoading}
             className="text-danger ms-2"

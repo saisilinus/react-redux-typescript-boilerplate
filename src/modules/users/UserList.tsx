@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, ButtonGroup, Col, Dropdown, Form, InputGroup, Row, Table } from 'react-bootstrap';
-import { faCheck, faPlus, faSearch, faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { Button, ButtonGroup, Col, Dropdown, InputGroup, Row, Table } from 'react-bootstrap';
+import { faCheck, faPlus, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RangeSlider from 'react-bootstrap-range-slider';
 import SingleUserRow from './SingleUserRow';
@@ -52,22 +52,7 @@ const UserList = () => {
         </div>
       </div>
       <div className="table-settings mb-4">
-        <Row className="justify-content-between align-items-center">
-          <Col xs={9} lg={4} className="d-flex">
-            <InputGroup className="me-2 me-lg-3">
-              <InputGroup.Text>
-                <FontAwesomeIcon icon={faSearch} />
-              </InputGroup.Text>
-              <Form.Control type="text" placeholder="Search" />
-            </InputGroup>
-            <Form.Select className="w-25">
-              <option defaultChecked>All</option>
-              <option value="1">Active</option>
-              <option value="2">Inactive</option>
-              <option value="3">Pending</option>
-              <option value="3">Canceled</option>
-            </Form.Select>
-          </Col>
+        <Row className="justify-content-end align-items-center">
           <Col xs={3} lg={8} className="text-end">
             <Dropdown as={ButtonGroup} className="me-2">
               <Dropdown.Toggle split as={Button} variant="link" className="text-dark m-0 p-0">

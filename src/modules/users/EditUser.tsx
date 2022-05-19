@@ -86,6 +86,7 @@ const EditUser = () => {
                         <FontAwesomeIcon icon={faAt} />
                       </InputGroup.Text>
                       <Form.Control
+                        data-testid="editUser-email"
                         required={false}
                         type="email"
                         defaultValue={data.email ?? ''}
@@ -103,6 +104,7 @@ const EditUser = () => {
                         <FontAwesomeIcon icon={faKey} />
                       </InputGroup.Text>
                       <Form.Control
+                        data-testid="editUser-password"
                         required={false}
                         type="password"
                         placeholder="Password"

@@ -3,6 +3,9 @@ import { render, screen, waitFor } from '../../../../../__mocks__/utils';
 import DashNav from './DashNav';
 import server from '../../../../../__mocks__/server';
 import { Routing } from '../../../common/routing';
+import { admin } from '../../../../../__mocks__/data';
+import routes from '../../../common/routing/routes';
+import NotifyContainer from '../../../common/components/Notify';
 
 beforeAll(() => server.listen());
 
@@ -22,57 +25,51 @@ describe('Dashboard Navbar', () => {
   });
 
   test('fetches logged in user and displays username', async () => {
-    const { user } = render(<Routing />);
+    window.localStorage.setItem('userId', 'someId');
+    render(<DashNav />);
 
-    // user tries to access dashboard
-    await user.click(screen.getByText(/Dashboard/i));
-
-    // the user is redirected to login page
-    expect(screen.getByText(/Sign in to our platform/i)).toBeInTheDocument();
-
-    // user logs in
-    await user.type(screen.getByTestId('login-email'), 'john@example.com');
-    await user.type(screen.getByTestId('login-password'), 'Some Password');
-    await user.click(screen.getByTestId('login-submit'));
-
-    // user redirected to dashboard
-    await waitFor(() => expect(screen.getByText(/DashboardHome/i)).toBeInTheDocument());
-
-    await waitFor(() => expect(screen.getByText(/Katelynn Morse/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(admin.user.name)).toBeInTheDocument());
   });
 
   test('user dropdown works', async () => {
     const { user } = render(<DashNav />);
 
-    await user.click(screen.getByText(/unknown/i));
+    await user.click(screen.getByRole('button', { name: 'unknown' }));
 
     expect(screen.getByText(/Logout/i)).toBeInTheDocument();
   });
 
   test('logs out user and redirects them to login', async () => {
-    const { user } = render(<Routing />);
+    window.localStorage.setItem('userId', 'someId');
+    window.localStorage.setItem('refreshToken', 'someToken');
+    const { user } = render(<Routing />, { route: routes.Dashboard.absolutePath });
 
-    // user tries to access dashboard
-    await user.click(screen.getByText(/Dashboard/i));
-
-    // the user is redirected to login page
-    expect(screen.getByText(/Sign in to our platform/i)).toBeInTheDocument();
-
-    // user logs in
-    await user.type(screen.getByTestId('login-email'), 'john@example.com');
-    await user.type(screen.getByTestId('login-password'), 'Some Password');
-    await user.click(screen.getByTestId('login-submit'));
-
-    // user redirected to dashboard
-    await waitFor(() => expect(screen.getByText(/DashboardHome/i)).toBeInTheDocument());
-
-    await waitFor(() => expect(screen.getByText(/Katelynn Morse/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(admin.user.name)).toBeInTheDocument());
 
     // user logs out
-    await user.click(screen.getByText(/Katelynn Morse/i));
-    await user.click(screen.getByText(/Logout/i));
+    await user.click(screen.getByText(admin.user.name));
+    await user.click(screen.getByRole('button', { name: 'Logout' }));
 
     // user redirected to login
     await waitFor(() => expect(screen.getByText(/Sign in to our platform/i)).toBeInTheDocument());
+  });
+
+  test('user should get notification if they try to logout while not logged in', async () => {
+    window.localStorage.setItem('userId', 'someId');
+    const { user } = render(
+      <div>
+        <NotifyContainer />
+        <DashNav />
+      </div>
+    );
+
+    await waitFor(() => expect(screen.getByText(admin.user.name)).toBeInTheDocument());
+
+    // user logs out
+    await user.click(screen.getByText(admin.user.name));
+    await user.click(screen.getByRole('button', { name: 'Logout' }));
+
+    // Notification
+    await waitFor(() => expect(screen.getByText(/You have to be logged in to log out/i)).toBeInTheDocument());
   });
 });

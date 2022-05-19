@@ -18,14 +18,11 @@ const RequireAuth = ({ element, restrictedTo }: Props) => {
 
     if (isLoading) return <Loader />;
 
-    if (!user || !restrictedTo.includes(user.role)) {
-      return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace={true} />;
+    if (user && restrictedTo.includes(user.role)) {
+      return element;
     }
-  } else if (!id) {
-    return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace={true} />;
   }
-
-  return element;
+  return <Navigate to={routes.Login.absolutePath} state={{ from: location }} replace={true} />;
 };
 
 export default RequireAuth;

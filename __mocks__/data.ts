@@ -73,6 +73,13 @@ export const users: IUserWithoutPassword[] = [
     email: 'kelvin@gmail.com',
     isEmailVerified: false,
   },
+  {
+    id: '11',
+    name: 'Bradley Saisi',
+    role: 'admin',
+    email: 'brad@gmail.com',
+    isEmailVerified: true,
+  },
 ];
 
 export const userWithTokens: IUserWithTokens = {
@@ -91,8 +98,46 @@ export const userWithTokens: IUserWithTokens = {
   },
 };
 
+export const admin: IUserWithTokens = {
+  user: users[0],
+  tokens: {
+    access: {
+      token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg',
+      expires: '2022-07-12T16:18:04.793Z',
+    },
+    refresh: {
+      token:
+        'ezGhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXBg',
+      expires: '2022-08-12T16:18:04.793Z',
+    },
+  },
+};
+
+export const normalUser: IUserWithTokens = {
+  user: users[1],
+  tokens: {
+    access: {
+      token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg',
+      expires: '2022-07-12T16:18:04.793Z',
+    },
+    refresh: {
+      token:
+        'ezGhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXBg',
+      expires: '2022-08-12T16:18:04.793Z',
+    },
+  },
+};
+
+export const mockPagination = (page: number, numberOfItemsPerPage: number) => {
+  const start = (page - 1) * numberOfItemsPerPage;
+  const end = start + numberOfItemsPerPage;
+  return users.slice(start, end);
+};
+
 export const queryResult: IQueryResult<IUserWithoutPassword> = {
-  results: users,
+  results: mockPagination(1, 5),
   limit: users.length,
   totalPages: 1,
   totalResults: users.length,

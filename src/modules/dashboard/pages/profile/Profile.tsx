@@ -28,7 +28,7 @@ const Profile = () => {
     if (!user) toast.error('User is not logged in');
     else if (checkOneOf([firstName, lastName, email, password])) toast.error('Please fill at least one field');
     else {
-      await updateUser({ id: user?.id, body })
+      await updateUser({ id: user.id, body })
         .unwrap()
         .then((updatedUser) => {
           toast.success(`${updatedUser.name} has been successfully updated!`);
@@ -81,6 +81,7 @@ const Profile = () => {
                         <FontAwesomeIcon icon={faAt} />
                       </InputGroup.Text>
                       <Form.Control
+                        data-testid="profile-email"
                         required={false}
                         type="email"
                         defaultValue={user.email ?? ''}
@@ -98,6 +99,7 @@ const Profile = () => {
                         <FontAwesomeIcon icon={faKey} />
                       </InputGroup.Text>
                       <Form.Control
+                        data-testid="profile-password"
                         required={false}
                         type="password"
                         placeholder="Password"

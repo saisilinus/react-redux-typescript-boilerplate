@@ -1,16 +1,14 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
+import formattedYear from '../../../common/utils/formattedYear';
 
 const Footer = () => {
-  const initialYear = 2022;
-  const currentYear = new Date().getFullYear();
-  const formatYear: string = initialYear === currentYear ? initialYear.toString() : `${initialYear} - ${currentYear}`;
   return (
     <footer className="footer py-5">
       <Row>
         <Col xs={12} lg={6} className="mb-4 mb-lg-0">
           <p className="mb-0 text-center text-xl-left">
-            Copyright © {`${formatYear} `}
+            Copyright © {`${formattedYear(2022)} `}
             <Card.Link className="text-blue text-decoration-none fw-normal">Linus Saisi</Card.Link>
           </p>
         </Col>

@@ -9,6 +9,7 @@ import routes from '../common/routing/routes';
 import Animate from '../common/components/Animate';
 
 const Register = () => {
+  localStorage.setItem('rememberMe', 'false');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -102,6 +103,25 @@ const Register = () => {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </InputGroup>
+                    </Form.Group>
+                    <Form.Group id="remember" className="mb-4">
+                      <Form.Check type="checkbox">
+                        <Form.Check.Input
+                          data-testid="register-rememberMe"
+                          id="rememberMe"
+                          className="me-2"
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              localStorage.setItem('rememberMe', 'true');
+                            } else {
+                              localStorage.setItem('rememberMe', 'false');
+                            }
+                          }}
+                        />
+                        <Form.Check.Label htmlFor="rememberMe" className="mb-0">
+                          Remember me
+                        </Form.Check.Label>
+                      </Form.Check>
                     </Form.Group>
                     <Button variant="primary" type="submit" className="w-100" data-testid="register-submit">
                       Register

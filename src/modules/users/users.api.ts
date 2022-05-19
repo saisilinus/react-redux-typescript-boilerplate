@@ -100,3 +100,15 @@ export const {
   useDeleteUserMutation,
 } = userApi;
 export default userApi;
+
+export const useCurrentUser = () => {
+  let user: IUserWithoutPassword | null = null;
+  const id = sessionStorage.getItem('userId') || localStorage.getItem('userId');
+  if (id) {
+    const { data } = useGetSingleUserQuery({ id });
+    if (data) {
+      user = data;
+    }
+  }
+  return user;
+};
