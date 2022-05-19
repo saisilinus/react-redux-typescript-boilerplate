@@ -4,7 +4,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Accordion, Nav } from 'react-bootstrap';
 import { useCurrentUser } from '../../../users/users.api';
-import { restrictions } from '../../../common/routing';
+import restrictions from '../../../common/routing/restrictions';
 
 type Props = {
   eventKey: string;

@@ -6,7 +6,7 @@ import { Badge, Nav, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Color } from 'react-bootstrap/esm/types';
 import { useCurrentUser } from '../../../users/users.api';
-import { restrictions } from '../../../common/routing';
+import restrictions from '../../../common/routing/restrictions';
 
 type Props = {
   title: string;

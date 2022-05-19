@@ -3,12 +3,13 @@ import { rest } from 'msw';
 import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import { render, screen, waitFor } from '../../../../__mocks__/utils';
 import Sidebar from './Sidebar';
-import { restrictions, Routing } from '../../../common/routing';
+import { Routing } from '../../../common/routing';
 import server from '../../../../__mocks__/server';
 import { normalUser } from '../../../../__mocks__/data';
 import CollapsibleNavItem from './CollapsibleNavItem';
 import routes from '../../../common/routing/routes';
 import NavItem from './NavItem';
+import restrictions from '../../../common/routing/restrictions';
 
 beforeAll(() => server.listen());
 
