@@ -1,8 +1,8 @@
 import React from 'react';
 import { rest } from 'msw';
-import { render, screen, waitFor } from '../../../../testUtils/utils';
-import server from '../../../../testUtils/server';
-import { normalUser } from '../../../../testUtils/data';
+import { render, screen, waitFor } from '../../../../__mocks__/utils';
+import server from '../../../../__mocks__/server';
+import { normalUser } from '../../../../__mocks__/data';
 import Routing from '../Routing';
 import routes from '../routes';
 

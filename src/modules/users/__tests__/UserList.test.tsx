@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../__mocks__/utils';
 import UserList from '../UserList';
-import server from '../../../testUtils/server';
+import server from '../../../__mocks__/server';
 import { Routing } from '../../common/routing';
 import routes from '../../common/routing/routes';
 

@@ -62,3 +62,8 @@ export const handlers = [
 const server = setupServer(...handlers);
 
 export default server;
+
+window.msw = {
+  rest,
+  server,
+};

@@ -1,8 +1,8 @@
 import React from 'react';
 import * as router from 'react-router-dom';
-import { render, screen, waitFor } from '../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../__mocks__/utils';
 import EditUser from '../EditUser';
-import server from '../../../testUtils/server';
+import server from '../../../__mocks__/server';
 import NotifyContainer from '../../common/components/Notify';
 
 const mockRouter = router as unknown as { useParams: () => Record<string, string> };

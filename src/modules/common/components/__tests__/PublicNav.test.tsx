@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routing } from '../../routing';
-import { render, screen, waitFor } from '../../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../../__mocks__/utils';
 import PublicNav from '../PublicNav';
-import server from '../../../../testUtils/server';
+import server from '../../../../__mocks__/server';
 
 beforeAll(() => server.listen());
 

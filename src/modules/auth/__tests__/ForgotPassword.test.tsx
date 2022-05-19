@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routing } from '../../common/routing';
-import { render, screen, waitFor } from '../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../__mocks__/utils';
 import ForgotPassword from '../ForgotPassword';
-import server from '../../../testUtils/server';
+import server from '../../../__mocks__/server';
 import NotifyContainer from '../../common/components/Notify';
 import routes from '../../common/routing/routes';
 

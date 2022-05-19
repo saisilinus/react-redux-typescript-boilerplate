@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../../__mocks__/utils';
 import DashNav from './DashNav';
-import server from '../../../../testUtils/server';
+import server from '../../../../__mocks__/server';
 import { Routing } from '../../../common/routing';
-import { admin } from '../../../../testUtils/data';
+import { admin } from '../../../../__mocks__/data';
 import routes from '../../../common/routing/routes';
 import NotifyContainer from '../../../common/components/Notify';
 

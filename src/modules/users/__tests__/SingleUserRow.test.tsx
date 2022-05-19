@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../__mocks__/utils';
 import SingleUserRow from '../SingleUserRow';
-import { users } from '../../../testUtils/data';
-import server from '../../../testUtils/server';
+import { users } from '../../../__mocks__/data';
+import server from '../../../__mocks__/server';
 import NotifyContainer from '../../common/components/Notify';
 
 const mockNavigate = jest.fn();

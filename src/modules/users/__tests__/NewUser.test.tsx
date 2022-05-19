@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../testUtils/utils';
+import { render, screen, waitFor } from '../../../__mocks__/utils';
 import NewUser from '../NewUser';
-import server from '../../../testUtils/server';
+import server from '../../../__mocks__/server';
 import NotifyContainer from '../../common/components/Notify';
 
 beforeAll(() => server.listen());
