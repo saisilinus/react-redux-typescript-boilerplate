@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routing } from '../../common/routing';
-import { render, screen, waitFor } from '../../../../__mocks__/utils';
+import { render, screen, waitFor } from '../../../testUtils/utils';
 import Register from '../Register';
-import server from '../../../../__mocks__/server';
-import { userWithTokens } from '../../../../__mocks__/data';
+import server from '../../../testUtils/server';
+import { userWithTokens } from '../../../testUtils/data';
 import routes from '../../common/routing/routes';
 
 jest.spyOn(Object.getPrototypeOf(window.localStorage), 'setItem');

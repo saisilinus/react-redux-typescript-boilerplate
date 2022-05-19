@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../../../../__mocks__/utils';
+import { render, screen } from '../../../../testUtils/utils';
 import Routing from '../Routing';
 
 describe('Navigation', () => {

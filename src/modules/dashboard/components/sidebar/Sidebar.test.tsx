@@ -1,11 +1,11 @@
 import React from 'react';
 import { rest } from 'msw';
 import { faCog, faUser } from '@fortawesome/free-solid-svg-icons';
-import { render, screen, waitFor } from '../../../../../__mocks__/utils';
+import { render, screen, waitFor } from '../../../../testUtils/utils';
 import Sidebar from './Sidebar';
 import { restrictions, Routing } from '../../../common/routing';
-import server from '../../../../../__mocks__/server';
-import { normalUser } from '../../../../../__mocks__/data';
+import server from '../../../../testUtils/server';
+import { normalUser } from '../../../../testUtils/data';
 import CollapsibleNavItem from './CollapsibleNavItem';
 import routes from '../../../common/routing/routes';
 import NavItem from './NavItem';

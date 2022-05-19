@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '../../../../../__mocks__/utils';
+import { render, screen } from '../../../../testUtils/utils';
 import { Paginate } from '..';
-import { queryResult, mockPagination } from '../../../../../__mocks__/data';
+import { queryResult, mockPagination } from '../../../../testUtils/data';
 
 const itemsPerPage = 1;
 const onPageClick = jest.fn();

@@ -1,6 +1,6 @@
-import { IUserWithoutPassword } from '../src/modules/users/users.types';
-import { IUserWithTokens } from '../src/modules/auth/auth.types';
-import IQueryResult from '../src/modules/common/definitions/IQueryResults';
+import { IUserWithoutPassword } from '../modules/users/users.types';
+import { IUserWithTokens } from '../modules/auth/auth.types';
+import IQueryResult from '../modules/common/definitions/IQueryResults';
 
 export const users: IUserWithoutPassword[] = [
   {

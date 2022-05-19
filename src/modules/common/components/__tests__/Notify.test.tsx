@@ -1,7 +1,7 @@
 import React from 'react';
 import { rest } from 'msw';
-import { render, screen } from '../../../../../__mocks__/utils';
-import server from '../../../../../__mocks__/server';
+import { render, screen } from '../../../../testUtils/utils';
+import server from '../../../../testUtils/server';
 import { IErrorResponse } from '../../definitions';
 import { Login } from '../../../auth';
 

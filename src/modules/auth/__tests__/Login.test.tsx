@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../../__mocks__/utils';
+import { render, screen, waitFor } from '../../../testUtils/utils';
 import Login from '../Login';
-import server from '../../../../__mocks__/server';
-import { userWithTokens } from '../../../../__mocks__/data';
+import server from '../../../testUtils/server';
+import { userWithTokens } from '../../../testUtils/data';
 import { Routing } from '../../common/routing';
 import routes from '../../common/routing/routes';
 

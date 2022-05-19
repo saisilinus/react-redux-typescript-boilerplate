@@ -1,9 +1,9 @@
 import React from 'react';
 import * as router from 'react-router-dom';
 import { Routing } from '../../common/routing';
-import { render, screen, waitFor } from '../../../../__mocks__/utils';
+import { render, screen, waitFor } from '../../../testUtils/utils';
 import VerifyEmail from '../VerifyEmail';
-import server from '../../../../__mocks__/server';
+import server from '../../../testUtils/server';
 import NotifyContainer from '../../common/components/Notify';
 import routes from '../../common/routing/routes';
 

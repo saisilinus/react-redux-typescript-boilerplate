@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"    
   },
-  "include": ["src", "__mocks__/utils.tsx", "__mocks__/data.ts", "__mocks__/server.ts"]
+  "include": ["src", "src/testUtils/utils.tsx", "src/testUtils/data.ts", "src/testUtils/server.ts"]
 }

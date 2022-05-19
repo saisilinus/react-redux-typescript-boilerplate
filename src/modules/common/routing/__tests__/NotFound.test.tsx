@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '../../../../../__mocks__/utils';
+import { render, screen, waitFor } from '../../../../testUtils/utils';
 import { NotFound, Routing } from '..';
 
 describe('Not Found', () => {
