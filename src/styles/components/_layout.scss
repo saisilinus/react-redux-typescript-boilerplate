@@ -1,0 +1,31 @@
+.fadeIn {
+    @include keyframes(fadeIn){
+        from {
+            opacity: 0;
+            transform: translate(-20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate(0px, 0px);
+        }
+    }
+    @include animate(fadeIn, 0.5s, ease, forwards)
+}
+
+.fadeOut {
+    @include keyframes(fadeOut){
+        from {
+            opacity: 1;
+            transform: translate(0px, 0px);
+        }
+        to {
+            opacity: 0;
+            transform: translate(-20px, 0);
+        }
+    }
+    @include animate(fadeOut, 0.5s, ease, forwards)
+}
+
+.full-width {
+    max-width: 100vw;
+}

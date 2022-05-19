@@ -29,6 +29,17 @@
           "tsx": "never"
         }
     ],
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": ["function-declaration", "arrow-function"],
+        "unnamedComponents": ["function-expression", "arrow-function"]
+      }
+    ],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "no-undef": "off",
+    "react/jsx-no-bind": [ "error", { "allowFunctions" : true, "allowArrowFunctions": true } ],
+    "react/require-default-props": [ 0 ]
   }
 }

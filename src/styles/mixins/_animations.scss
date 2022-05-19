@@ -1,0 +1,60 @@
+@mixin transitions($time, $type){
+    -webkit-transition: all $time $type;
+    -moz-transition: all $time $type;
+    -o-transition: all $time $type;
+    -ms-transition: all $time $type;
+    transition: all $time $type;
+}
+
+@mixin transitions-property($property, $time, $type){
+    -webkit-transition: $property $time $type;
+    -moz-transition: $property $time $type;
+    -o-transition: $property $time $type;
+    -ms-transition: $property $time $type;
+    transition: $property $time $type;
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }  
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }  
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animate($animation,$duration,$method, $fill-mode) {
+    -webkit-animation: #{$animation $duration $method $fill-mode};
+    -moz-animation: #{$animation $duration $method $fill-mode};
+    -ms-animation: #{$animation $duration $method $fill-mode};
+    -o-animation: #{$animation $duration $method $fill-mode};
+    animation: #{$animation $duration $method $fill-mode};
+}
+
+@mixin transform($transforms) {
+	-moz-transform: $transforms;
+	-o-transform: $transforms;
+	-ms-transform: $transforms;
+	-webkit-transform: $transforms;
+	transform: $transforms;
+}
+  
+
+// translate
+@mixin translate ($x, $y) {
+	@include transform(translate($x, $y));
+}
+
+// rotate
+@mixin rotate ($deg) {
+	@include transform(rotate(#{$deg}deg));
+}
