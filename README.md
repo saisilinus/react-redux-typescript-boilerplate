@@ -92,6 +92,7 @@ src
 │   ├── middleware.ts
 │   └── store.ts
 ├── assets
+│   └── img
 ├── custom.d.ts
 ├── index.tsx
 ├── __mocks__
@@ -100,126 +101,22 @@ src
 │   └── utils.tsx
 ├── modules
 │   ├── auth
-│   │   ├── auth.api.ts
-│   │   ├── auth.types.ts
-│   │   ├── ForgotPassword.tsx
-│   │   ├── index.ts
-│   │   ├── Login.tsx
-│   │   ├── Register.tsx
-│   │   ├── ResetPassword.tsx
-│   │   ├── __tests__
-│   │   │   ├── ForgotPassword.test.tsx
-│   │   │   ├── Login.test.tsx
-│   │   │   ├── Register.test.tsx
-│   │   │   ├── ResetPassword.test.tsx
-│   │   │   └── VerifyEmail.test.tsx
-│   │   └── VerifyEmail.tsx
 │   ├── common
-│   │   ├── components
-│   │   │   ├── Animate.tsx
-│   │   │   ├── index.ts
-│   │   │   ├── Layout.tsx
-│   │   │   ├── Loader.tsx
-│   │   │   ├── Notify.tsx
-│   │   │   ├── Paginate.tsx
-│   │   │   ├── PublicNav.tsx
-│   │   │   └── __tests__
-│   │   │       ├── Notify.test.tsx
-│   │   │       ├── Paginate.test.tsx
-│   │   │       └── PublicNav.test.tsx
-│   │   ├── definitions
-│   │   │   ├── IDoc.ts
-│   │   │   ├── IErrorResponse.ts
-│   │   │   ├── index.ts
-│   │   │   ├── IQueryFilter.ts
-│   │   │   └── IQueryResults.ts
-│   │   ├── routing
-│   │   │   ├── index.ts
-│   │   │   ├── NotFound.tsx
-│   │   │   ├── RequireAuth.tsx
-│   │   │   ├── restrictions.ts
-│   │   │   ├── routes.ts
-│   │   │   ├── Routing.tsx
-│   │   │   └── __tests__
-│   │   │       ├── NotFound.test.tsx
-│   │   │       ├── RequireAuth.test.tsx
-│   │   │       └── Routing.test.tsx
-│   │   └── utils
-│   │       ├── checkOneOf.ts
-│   │       ├── formatErrorMessage.ts
-│   │       ├── formatName.ts
-│   │       ├── formattedYear.ts
-│   │       ├── getPages.ts
-│   │       ├── index.ts
-│   │       ├── isEmpty.ts
-│   │       ├── sanitize.ts
-│   │       ├── splitName.ts
-│   │       └── utils.test.ts
 │   ├── dashboard
-│   │   ├── components
-│   │   │   ├── footer
-│   │   │   │   ├── Footer.test.tsx
-│   │   │   │   └── Footer.tsx
-│   │   │   ├── layout
-│   │   │   │   └── SidebarLayout.tsx
-│   │   │   ├── navbar
-│   │   │   │   ├── DashNav.test.tsx
-│   │   │   │   └── DashNav.tsx
-│   │   │   └── sidebar
-│   │   │       ├── CollapsibleNavItem.tsx
-│   │   │       ├── NavItem.tsx
-│   │   │       ├── Sidebar.test.tsx
-│   │   │       ├── Sidebar.tsx
-│   │   │       └── Toggle.tsx
-│   │   ├── index.ts
-│   │   └── pages
-│   │       ├── home
-│   │       │   ├── DashboardHome.tsx
-│   │       │   └── Dashboard.test.tsx
-│   │       └── profile
-│   │           ├── Profile.test.tsx
-│   │           └── Profile.tsx
 │   ├── pages
-│   │   └── home
-│   │       ├── Home.test.tsx
-│   │       └── Home.tsx
 │   └── users
-│       ├── EditUser.tsx
-│       ├── index.ts
-│       ├── NewUser.tsx
-│       ├── SingleUserRow.tsx
-│       ├── __tests__
-│       │   ├── EditUser.test.tsx
-│       │   ├── NewUser.test.tsx
-│       │   ├── SingleUserRow.test.tsx
-│       │   └── UserList.test.tsx
-│       ├── UserList.tsx
-│       ├── users.api.ts
-│       └── users.types.ts
 ├── react-app-env.d.ts
 ├── serviceWorker.ts
 ├── setupTests.ts
 ├── styles
 │   ├── components
-│   │   ├── _avatars.scss
-│   │   ├── _forms.scss
-│   │   ├── _layout.scss
-│   │   ├── _loader.scss
-│   │   ├── _route.scss
-│   │   └── _tables.scss
 │   ├── _components.scss
 │   ├── custom.scss
 │   ├── layout
-│   │   ├── _footer.scss
-│   │   ├── _navbar.scss
-│   │   └── _sidebar.scss
 │   ├── _layouts.scss
 │   ├── mixins
-│   │   ├── _animations.scss
-│   │   └── _utilities.scss
 │   ├── _mixins.scss
 │   ├── utilities
-│   │   └── _sizing.scss
 │   ├── _utilities.scss
 │   └── _variables.scss
 └── testUtils
