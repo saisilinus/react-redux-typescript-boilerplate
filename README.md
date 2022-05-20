@@ -131,12 +131,14 @@ src
 
 Authentication has already been done for you with the redux-toolkit query API setup. The app was created with APIs from this [node-template](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate) in mind. 
 
-The following pages are included in the app:
+Pages included in the app include: 
+    - Login
+    - Register
+    - Forgot Password
+    - Reset Password
+    - Verify Email
 
-<div>
-    <img src="src/assets/img/screenshots/register.png" alt="register" title="Register" height="100%" width="100%">
-    <img src="src/assets/img/screenshots/login.png" alt="login" title="Login" height="100%" width="100%">
-</div>
+![login form](src/assets/img/screenshots/login.png?raw=true "Login")
 
 ## Linting
 
