@@ -73,8 +73,6 @@
     "@testing-library/dom": "^8.13.0",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -86,11 +84,13 @@
     "husky": "^7.0.4",
     "lint-staged": ">=10",
     "prettier": "^2.6.2",
-    "standard-version": "^9.3.2"
+    "standard-version": "^9.3.2",
+    "@ryansonshine/commitizen": "^4.2.8",
+    "@ryansonshine/cz-conventional-changelog": "^3.3.4"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
     }
   },
   "lint-staged": {
@@ -113,8 +113,5 @@
         "statements": 90
       }
     }
-  },
-  "resolutions": {
-    "commitizen/minimist": "1.2.6"
   }
 }
