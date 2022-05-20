@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/saisilinus/react-redux-typescript-boilerplate/compare/v0.1.0...v0.1.1) (2022-05-20)
+
+
+### Bug Fixes
+
+* **package.json:** add resolution for minimist ([55e7a0e](https://github.com/saisilinus/react-redux-typescript-boilerplate/commit/55e7a0e3273edfa3d9ddf8fd50b19b5430d07ae0))
+
 ## 0.1.0 (2022-05-19)
 
 
