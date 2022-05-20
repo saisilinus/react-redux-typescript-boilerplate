@@ -16,6 +16,7 @@ This app pairs well with this [node-js express template](https://github.com/sais
 - [Folder Structure](#folder-structure)
 - [Authentication](#authentication)
     - [Require Auth](#require-auth)
+- [User Management](#user-management)
 - [Pagination](#pagination)
 - [Animation](#animation)
 - [Linting](#linting)
@@ -147,7 +148,7 @@ Pages included in the app include:
 
 Like authentication, user management has already been done for you using rtk query.
 
-<img src="src/assets/img/screenshots/user-list.png" alt="user list" title="Users" />
+<img src="src/assets/img/screenshots/users-list.png" alt="user list" title="Users" />
 
 ### Require Auth
 
