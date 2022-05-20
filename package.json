@@ -2,7 +2,14 @@
   "name": "react-redux-typescript-boilerplate",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "linus saisi",
+    "email": "saisilinus.work@gmail.com"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
@@ -108,6 +115,6 @@
     }
   },
   "resolutions": {
-    "minimist@1.2.5": "1.2.6"
+    "commitizen/minimist": "1.2.6"
   }
 }
