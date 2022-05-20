@@ -134,8 +134,8 @@ Authentication has already been done for you with the redux-toolkit query API se
 The following pages are included in the app:
 
 <div>
-    <img src="src/assets/img/screenshots/register.png" alt="register" title="Register" height="50%" width="50%">
-    <img src="src/assets/img/screenshots/login.png" alt="login" title="Login" height="50%" width="50%">
+    <img src="src/assets/img/screenshots/register.png" alt="register" title="Register" height="100%" width="100%">
+    <img src="src/assets/img/screenshots/login.png" alt="login" title="Login" height="100%" width="100%">
 </div>
 
 ## Linting
