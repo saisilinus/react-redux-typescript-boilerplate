@@ -5,6 +5,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+This app pairs well with this [node-js express template](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate)
+
 ## Table of Contents
 
 - [Available Scripts](#available-scripts)
@@ -12,6 +14,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [Features](#features)
 - [Environment Variables](#environment-variables)
 - [Folder Structure](#folder-structure)
+- [Authentication](#authentication)
+    - [Require Auth](#require-auth)
+- [User Management](#user-management)
+- [Pagination](#pagination)
+- [Animation](#animation)
 - [Linting](#linting)
 - [License](#license)
 
@@ -67,6 +74,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - **Notifications**: [react-toastify](https://github.com/fkhadra/react-toastify) awesome toast notifications with react-toastify
 - **Styling**: [React Bootstrap](https://react-bootstrap.github.io/) style with bootstrap components via React Bootstrap
 - **SASS**: [SASS](https://sass-lang.com/) style more with SASS
+- **Animations**: [React Transition Group](https://reactcommunity.org/react-transition-group/) animate using an Animate component created using elements from React Transition Group
+- **Pagination**: [React Bootstrap Pagination](https://react-bootstrap.github.io/components/pagination/) paginate with custom component built on React Bootstrap's Pagination
 - **Error handling**: [RTK Query Error Handling](https://redux-toolkit.js.org/rtk-query/usage/error-handling) centralized error handling mechanism for fetch requests using rtk query middleware
 - **CI**: continuous integration with [GitHub CI](https://travis-ci.org)
 - **Code coverage**: using [codecov](https://about.codecov.io/)
@@ -87,41 +96,144 @@ cp .env.example .env.local
 
 ```
 src
-├── app
-│   ├── api.ts
-│   ├── hooks.ts
-│   ├── middleware.ts
-│   └── store.ts
-├── assets
+├── app                             # Redux configuration
+│   ├── api.ts                          # base redux API
+│   ├── hooks.ts                        # redux hooks
+│   ├── middleware.ts                   # redux middleware
+│   └── store.ts                        # redux store
+├── assets                          # assets
 │   └── img
-├── custom.d.ts
-├── index.tsx
-├── __mocks__
+├── custom.d.ts                     # extended custom types
+├── index.tsx                       # app entry
+├── __mocks__                       # test utils and mocks
 │   ├── data.ts
 │   ├── server.ts
 │   └── utils.tsx
-├── modules
-│   ├── auth
-│   ├── common
-│   ├── dashboard
-│   ├── pages
-│   └── users
+├── modules                         # app modules including pages, components and APIs
+│   ├── auth                            # pages, components, tests, and redux API for auth
+│   ├── common                          # common components and tests. includes Routing
+│   ├── dashboard                       # dashboard pages, components, and tests
+│   ├── pages                           # pages
+│   └── users                           # pages, components, tests, and redux API for users
 ├── react-app-env.d.ts
 ├── serviceWorker.ts
 ├── setupTests.ts
-├── styles
-│   ├── components
-│   ├── _components.scss
-│   ├── custom.scss
-│   ├── layout
-│   ├── _layouts.scss
-│   ├── mixins
-│   ├── _mixins.scss
-│   ├── utilities
-│   ├── _utilities.scss
-│   └── _variables.scss
-└── testUtils
+├── styles                          # styling
+│   ├── components                      # component styling e.g. loader
+│   ├── _components.scss                # imports
+│   ├── custom.scss                     # root styling file
+│   ├── layout                          # layout components
+│   ├── _layouts.scss                   # imports
+│   ├── mixins                          # mixins
+│   ├── _mixins.scss                    # imports
+│   ├── utilities                       # utilities like transform styles
+│   ├── _utilities.scss                 # imports
+│   └── _variables.scss                 # custom variables
 ```
+
+## Authentication
+
+Authentication has already been done for you with the redux-toolkit query API setup. The app was created with APIs from this [node-template](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate) in mind. 
+
+Pages included in the app include: 
+- Login
+- Register
+- Forgot Password
+- Reset Password
+- Verify Email
+
+<img src="src/assets/img/screenshots/login.png" alt="login form" title="Login" />
+
+## User Management
+
+Like authentication, user management has already been done for you using rtk query.
+
+<img src="src/assets/img/screenshots/users-list.png" alt="user list" title="Users" />
+
+### Require Auth
+
+Wrapper for pages that require authentication. Just wrap the route element with RequireAuth and only logged in users with permissions will have access.
+
+```javascript
+import { Routes, Route } from 'react-router-dom';
+import RequireAuth from './RequireAuth';
+import { DashboardHome, Profile } from '../../dashboard';
+import restrictions from './restrictions';
+import routes from './routes';
+
+const MainRouter = () => {
+    return (
+        <Routes>
+            <Route path={routes.Dashboard.absolutePath}>
+                {/* dashboard will be restricted to all logged in users */}
+                <Route index element={<RequireAuth element={<DashboardHome />} restrictedTo={restrictions.none} />} />
+                {/* profile will be restricted to logged in admin users */}
+                <Route
+                    path={routes.Profile.relativePath}
+                    element={<RequireAuth element={<Profile />} restrictedTo={restrictions.admin} />}
+                />
+            </Route>
+        </Routes>
+    );
+}
+
+```
+
+As an added bonus: all the navigation items in the dashboard sidebar are also authenticated before being displayed. Define nav items with restrictions e.g.
+
+```javascript
+{/* They are automatically restricted to all logged in users*/}
+<NavItem
+    title="List"
+    link={routes.UserList.absolutePath}
+    pathname={location.pathname}
+    icon={faList}
+    restrictedTo={restrictions.admin}
+/>
+```
+
+## Pagination
+
+Pagination is done using custom logic built on top of [React Bootstrap's Pagination component](https://react-bootstrap.github.io/components/pagination/).
+
+Just wrap your component like so
+
+```javascript
+import React, { useState } from 'react';
+
+const [currentPage, setCurrentPage] = useState<number>(1);
+
+const data = fetchSomeData({ page: currentPage });
+
+const onPageClick = (page: number) => {
+    setCurrentPage(page);
+};
+
+<Paginate currentPage={currentPage} onPageClick={onPageClick} totalPages={data.totalPages}>
+    {data.map((item) => (
+        <h1 key={item.id}>{item.name}</h1>
+    ))}
+</Paginate>
+```
+
+## Animation
+Animate your component using custom css styles and a component built using [React Transition Group](https://reactcommunity.org/react-transition-group/). Animating is as easy as:
+
+```javascript
+import Animate from 'blob/components/Animate';
+
+const customComponent = () => {
+    return (
+        <>
+            <Animate>
+                <h1>This text will animate</h1>
+            </Animate>
+        </>
+    );
+};
+```
+
+You can change animation behavior by defining css classes and adding them to the Animate component
 
 ## Linting
 
