@@ -106,5 +106,8 @@
         "statements": 90
       }
     }
+  },
+  "resolutions": {
+    "minimist@1.2.5": "1.2.6"
   }
 }
