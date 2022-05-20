@@ -15,6 +15,9 @@ This app pairs well with this [node-js express template](https://github.com/sais
 - [Environment Variables](#environment-variables)
 - [Folder Structure](#folder-structure)
 - [Authentication](#authentication)
+    - [Require Auth](#require-auth)
+- [Pagination](#pagination)
+- [Animation](#animation)
 - [Linting](#linting)
 - [License](#license)
 
@@ -132,13 +135,104 @@ src
 Authentication has already been done for you with the redux-toolkit query API setup. The app was created with APIs from this [node-template](https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate) in mind. 
 
 Pages included in the app include: 
-    - Login
-    - Register
-    - Forgot Password
-    - Reset Password
-    - Verify Email
+- Login
+- Register
+- Forgot Password
+- Reset Password
+- Verify Email
 
-![login form](src/assets/img/screenshots/login.png?raw=true "Login")
+<img src="src/assets/img/screenshots/login.png" alt="login form" title="Login" />
+
+## User Management
+
+Like authentication, user management has already been done for you using rtk query.
+
+<img src="src/assets/img/screenshots/user-list.png" alt="user list" title="Users" />
+
+### Require Auth
+
+Wrapper for pages that require authentication. Just wrap the route element with RequireAuth and only logged in users with permissions will have access.
+
+```javascript
+import { Routes, Route } from 'react-router-dom';
+import RequireAuth from './RequireAuth';
+import { DashboardHome, Profile } from '../../dashboard';
+import restrictions from './restrictions';
+import routes from './routes';
+
+const MainRouter = () => {
+    return (
+        <Routes>
+            <Route path={routes.Dashboard.absolutePath}>
+                {/* dashboard will be restricted to all logged in users */}
+                <Route index element={<RequireAuth element={<DashboardHome />} restrictedTo={restrictions.none} />} />
+                {/* profile will be restricted to logged in admin users */}
+                <Route
+                    path={routes.Profile.relativePath}
+                    element={<RequireAuth element={<Profile />} restrictedTo={restrictions.admin} />}
+                />
+            </Route>
+        </Routes>
+    );
+}
+
+```
+
+As an added bonus: all the navigation items in the dashboard sidebar are also authenticated before being displayed. Define nav items with restrictions e.g.
+
+```javascript
+{/* They are automatically restricted to all logged in users*/}
+<NavItem
+    title="List"
+    link={routes.UserList.absolutePath}
+    pathname={location.pathname}
+    icon={faList}
+    restrictedTo={restrictions.admin}
+/>
+```
+
+## Pagination
+
+Pagination is done using custom logic built on top of [React Bootstrap's Pagination component](https://react-bootstrap.github.io/components/pagination/).
+
+Just wrap your component like so
+
+```javascript
+import React, { useState } from 'react';
+
+const [currentPage, setCurrentPage] = useState<number>(1);
+
+const data = fetchSomeData({ page: currentPage });
+
+const onPageClick = (page: number) => {
+    setCurrentPage(page);
+};
+
+<Paginate currentPage={currentPage} onPageClick={onPageClick} totalPages={data.totalPages}>
+    {data.map((item) => (
+        <h1 key={item.id}>{item.name}</h1>
+    ))}
+</Paginate>
+```
+
+## Animation
+Animate your component using custom css styles and a component built using [React Transition Group](https://reactcommunity.org/react-transition-group/). Animating is as easy as:
+
+```javascript
+import Animate from 'blob/components/Animate';
+
+const customComponent = () => {
+    return (
+        <>
+            <Animate>
+                <h1>This text will animate</h1>
+            </Animate>
+        </>
+    );
+};
+```
+
+You can change animation behavior by defining css classes and adding them to the Animate component
 
 ## Linting
 
