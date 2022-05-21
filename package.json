@@ -26,7 +26,6 @@
     "@types/react-redux": "^7.1.7",
     "async-mutex": "^0.3.2",
     "bootstrap": "^5.1.3",
-    "msw": "^0.39.2",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
     "react-bootstrap-range-slider": "^3.0.4",
@@ -81,6 +80,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "msw": "^0.39.2",
     "husky": "^7.0.4",
     "lint-staged": ">=10",
     "prettier": "^2.6.2",
@@ -94,7 +94,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
+    "*.(js|ts|tsx|jsx)": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
   },
   "prettier": {
     "singleQuote": true,
